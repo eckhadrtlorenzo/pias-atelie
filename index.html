@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celestine Ateliê - Alta Costura Interestelar</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <script src="produtos.js"></script>
+</head>
+<body>
+
+    <!-- MÁSCARA DE FUNDO (EFEITO ECLIPSE LUNAR CORES) -->
+    <div class="space-nebula"></div>
+
+    <!-- PAINEL LATERAL (MENU ACESSÓRIO GAVETA) -->
+    <aside id="sidePanel" class="side-panel">
+        <button class="close-btn" onclick="toggleMenu()" aria-label="Fechar menu">&times;</button>
+        <div class="panel-content">
+            <h3>🧭 Painel de Controle</h3>
+            <ul>
+                <li><a href="#pedidos">📦 Caixa de Pedidos</a></li>
+                <li><a href="#mais-vendidos">👑 Mais Vendidos (Clientes)</a></li>
+                <li><a href="#provador">🪐 Provador de Saturno 3D</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- CABEÇALHO / NAVEGAÇÃO -->
+    <header>
+        <div class="logo">
+            <h1>Celestine Ateliê</h1>
+            <p>✂️ Alta Costura Orbital</p>
+        </div>
+                <nav class="desktop-nav">
+                    <ul>
+                        <li><a href="#inicio">Órbita</a></li>
+                        <li><a href="#colecoes">Coleções</a></li>
+                        <li><a href="#atelie">O Ateliê</a></li>
+                        <!-- Alterado aqui para indicar que se trata do agendamento de pedidos -->
+                        <li><a href="#Agendamento">Ciclos Lunares (Pedidos)</a></li> 
+                        <li><a href="#Exploracao">Exploração</a></li> 
+                    </ul>
+                </nav>
+        
+
+        <div class="header-actions">
+            <button class="menu-hamburger" onclick="toggleMenu()" aria-label="Abrir menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <button type="button" class="btn-space-login">Entrar no Espaço</button>
+        </div>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main>
+        <!-- SEÇÃO HERO (BOAS-VINDAS) -->
+        <section id="inicio" class="hero-section">
+            <div class="hero-content">
+                <h2>Vista o Universo</h2>
+                <p>Alta costura moldada pela gravidade dos anéis de Saturno e iluminada pelo brilho místico da Lua. Descubra sua constelação de estilo.</p>
+                <button type="button">Iniciar Jornada</button>
+            </div>
+            <div class="hero-image-container">
+                <div class="saturn-ring"></div>
+                <div class="hero-image">
+                    <p>🌕 Looks Lunares em Destaque</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO DE RECURSOS / DIFERENCIAIS -->
+        <section id="features">
+            <h3>🪐 Matéria prima-estelar</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Design Gravitacional</h4>
+                    <p>Peças com caimento fluido que desafiam as leis da física e flutuam no corpo.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Rendas Lunares</h4>
+                    <p>Tramas prateadas costuradas sob a luz da lua cheia com fios refletores de fótons.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Cortes Orbitais</h4>
+                    <p>Linhas e geometrias perfeitas inspiradas nas órbitas perfeitas dos planetas.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO DE VITRINE / COLEÇÕES -->
+        <section id="colecoes">
+            <h3>🧵 Alfaiataria Cósmica: Acervo de Prêt-à-Porter</h3>
+
+            <div class="gallery">
+                <article class="product-item">
+                    <div class="product-thumb">
+                       <img src="img/vestido.jpeg" alt="">
+                    </div>
+                    <h4>Vestido Eclipse Total</h4>
+                    <p>Veludo negro profundo com detalhes em branco puro.</p>
+                </article>
+                <article class="product-item">
+                    <div class="product-thumb">
+                       <img src="img/terno.jpg" alt="">
+                    </div>
+                    <h4>Terno Alinhamento Astral</h4>
+                    <p>Cortes assimétricos com reflexos furta-cor de nebulosas.</p>
+                </article>
+                <article class="product-item">
+                    <div class="product-thumb">
+                        <img src="img/corset.jpeg" alt="">
+                    </div>
+                    <h4>Corset Aurora Lunar</h4>
+                    <p>Estrutura translúcida banhada a pó de pérola cósmica.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- SEÇÃO SOBRE O ATELIÊ -->
+        <section id="atelie">
+            <div class="manifesto-box">
+                <h3>📜 O Manifesto Celestine</h3>
+                <p>Nascemos sob a ideia de que a moda não deve ser terrena. O Celestine Ateliê une o mistério do universe profundo à sofisticação da alfaiataria. Cada peça é uma constelação única, feita sob medida para quem não tem medo de orbitar em alta sociedade.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- RODAPÉ CORRIGIDO E AMPLIADO -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h4>Celestine Ateliê</h4>
+                <p>Alta costura interplanetária da Terra até os confins de Saturno.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#inicio">Início</a>
+                <a href="#colecoes">Coleções</a>
+            </div>
+            <div class="footer-socials">
+                <a href="#" aria-label="Instagram">🌌 Instagram</a>
+                <a href="#" aria-label="Pinterest">🌙 Pinterest</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Celestine Ateliê. Todos os direitos mapeados ao redor do cosmos.</p>
+        </div>
+    </footer>
+
+    <!-- INTERATIVIDADE DO MENU -->
+    <script>
+        function toggleMenu() {
+            const sidePanel = document.getElementById('sidePanel');
+            sidePanel.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>

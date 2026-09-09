@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "titulo": "Vestido Eclipse Total",
+    "descricao": "Um body translúcido de alta-costura, esculpido com ramos tridimensionais que simulam a flora exótica nascendo no coração de uma galáxia distante.",
+    "imagem": "img/conjunto macaquinho.jpeg",
+    "alt": "Vestido Eclipse Total"
+  },
+  {
+    "id": 2,
+    "titulo": "Terno Alinhamento Astral",
+    "descricao": "Para completar o visual, as mangas bufantes removíveis em tule trazem a fluidez dos gases cósmicos, flutuando como a atmosfera etérea dessa nebulosa primaveril.",
+    "imagem": "img/macaquinho rosa.jpeg",
+    "alt": "Terno Alinhamento Astral"
+  },
+  {
+    "id": 3,
+    "titulo": "Corset Aurora Lunar",
+    "descricao": "Vestido sereia rosa-quartzo com corpete estruturado e amarrações imperiais.",
+    "imagem": "img/vestido rosa.jpeg",
+    "alt": "Corset Aurora Lunar"
+  },
+  {
+    "id": 4,
+    "titulo": "Manto Estelar Andromeda",
+    "descricao": "Conjunto de alta-costura futurista inspirado na flora exótica de uma nebulosa distante.",
+    "imagem": "img/vestido japones.jpeg",
+    "alt": "Manto Estelar Andromeda"
+  },
+  {
+    "id": 5,
+    "titulo": "Casaco Horizonte de Eventos",
+    "descricao": "Vestido de gala esculpido no preto absoluto do horizonte de eventos de um buraco negro.",
+    "imagem": "img/vestido negro.jpeg",
+    "alt": "Casaco Horizonte de Eventos"
+  },
+  {
+    "id": 6,
+    "titulo": "Mangas Nebulosa de Primavera",
+    "descricao": "Vestido de gala bicolor esculpido no contraste absoluto entre a luz estelar e o vazio do espaço.",
+    "imagem": "img/vestido branco.jpeg",
+    "alt": "Mangas Nebulosa de Primavera"
+  },
+  {
+    "id": 7,
+    "titulo": "Capa Nebulosa Escura",
+    "descricao": "Terno unissex de alta-costura sci-fi desenhado com fechos ornamentais para a alta sociedade do universo.",
+    "imagem": "img/terno beje.jpeg",
+    "alt": "Capa Nebulosa Escura"
+  },
+  {
+    "id": 8,
+    "titulo": "Túnica Gravidade Zero",
+    "descricao": "Traje de gala espacial estruturado com correntes de titânio estelar e amarrações que desafiam a gravidade.",
+    "imagem": "img/terno branco e vermelho.jpeg",
+    "alt": "Túnica Gravidade Zero"
+  },
+  {
+    "id": 9,
+    "titulo": "Diadema Estelar",
+    "descricao": "Sobretudo longo em veludo carmesim profundo inspirado no brilho intenso de uma estrela anâ vermelha.",
+    "imagem": "img/terno vermelho.jpeg",
+    "alt": "Diadema Estelar"
+  },
+  {
+    "id": 10,
+    "titulo": "Vestido Radiação Cósmica",
+    "descricao": "Traje diplomático cósmico rico em detalhes metálicos e punhos brocados que simulam relíquias de uma antiga galáxia.",
+    "imagem": "img/terno azul escuro.jpeg",
+    "alt": "Vestido Radiação Cósmica"
+  },
+  {
+    "id": 11,
+    "titulo": "Smoking Anéis de Saturno",
+    "descricao": "Malha celestial tecida com a própria essência do firmamento noturno.",
+    "imagem": "img/xale.jpeg",
+    "alt": "Smoking Anéis de Saturno"
+  },
+  {
+    "id": 12,
+    "titulo": "Ombreiras Cinturão de Asteroides",
+    "descricao": "Colete de alta-costura em jacquard azul-noturno com arabescos que imitam órbitas de uma galáxia antiga.",
+    "imagem": "img/corset verde masc.jpeg",
+    "alt": "Ombreiras Cinturão de Asteroides"
+  },
+  {
+    "titulo": "Manto Eclipse Total",
+    "descricao": "Uma peça autoral em veludo denso com detalhes esculpidos à mão.",
+    "imagem": "caminho/para/imagem1.jpg",
+    "alt": "Manto Eclipse Total",
+    "preco": "R$ 2.100,00 (Sob Medida)",
+    "tempo": "15 Dias Orbitais"
+  },
+  {
+    "titulo": "Túnica Nebulosa Dourada",
+    "descricao": "Tecida com fios metálicos saturnianos de alto brilho e caimento imponente.",
+    "imagem": "caminho/para/imagem2.jpg",
+    "alt": "Túnica Nebulosa Dourada",
+    "preco": "R$ 3.400,00 (Sob Medida)",
+    "tempo": "25 Dias Orbitais"
+  }
+]

@@ -1,0 +1,1410 @@
+/* ==========================================================================
+   1. RESET GERAL, CONFIGURAÇÃO DA TIPOGRAFIA E FUNDO COM NEBULOSA MANCHADINHA
+   - Controla: Margens globais, fontes importadas, variáveis de cores e a
+     fusão entre seus feixes, Estrelas de Belém e manchas suaves de nebulosa.
+   ========================================================================== */
+@import url('https://googleapis.com');
+
+:root {
+    --bg-space: #1a1c24; 
+    --lavender-glow: #9a9bc1;
+    --starlight: #ffffff;
+    --nebula-purple: #352a55;
+    --saturn-gold: #EEE4BB; 
+    --saturn-gold-dim: rgba(238, 228, 187, 0.2);
+    --glass-bg: rgba(154, 155, 193, 0.05);
+    --glass-border: rgba(154, 155, 193, 0.18);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-space);
+    color: var(--starlight);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.15rem;
+    line-height: 1.7;
+    overflow-x: hidden;
+    position: relative;
+    
+    /* 
+       A SUA ESTRUTURA ORIGINAL INTEGRAL + ADIÇÃO DA NEBULOSA MANCHADINHA:
+       Mantivemos todas as suas elipses e gradientes lineares idênticos.
+       No final, adicionamos manchas suaves em posições diferentes (at 20% 30% e at 80% 70%) 
+       para criar o efeito manchado orgânico de poeira cósmica sem poluir visualmente.
+    */
+    background-image: 
+        /* Suas Pontas Finas da Estrela de Belém Dourada */
+        radial-gradient(ellipse 2px 50px at 0% 0%, var(--saturn-gold), transparent),
+        radial-gradient(ellipse 50px 2px at 0% 0%, var(--saturn-gold), transparent),
+
+        /* Suas Pontas Finas da Estrela de Belém Branca */
+        radial-gradient(ellipse 1px 40px at 70px 110px, rgba(255, 255, 255, 0.8), transparent),
+        radial-gradient(ellipse 40px 1px at 70px 110px, rgba(255, 255, 255, 0.8), transparent),
+
+        /* Seus Gradientes Lineares Originais */
+        linear-gradient(90deg, transparent 49.5%, var(--saturn-gold-dim) 50%, transparent 50.5%),
+        linear-gradient(0deg, transparent 49.5%, var(--saturn-gold-dim) 50%, transparent 50.5%),
+        radial-gradient(circle, var(--saturn-gold) 0px, rgba(238, 228, 187, 0.8) 1.5px, transparent 4px),
+
+        linear-gradient(90deg, transparent 49.7%, rgba(255, 255, 255, 0.15) 50%, transparent 50.3%),
+        linear-gradient(0deg, transparent 49.7%, rgba(255, 255, 255, 0.15) 50%, transparent 50.3%),
+        radial-gradient(circle, rgba(255, 255, 255, 0.9) 0px, rgba(255, 255, 255, 0.6) 1px, transparent 3px),
+        
+        /* [NOVO] Mancha de Nebulosa Superior Esquerda (Suave e esfumada) */
+        radial-gradient(circle at 20% 30%, rgba(53, 42, 85, 0.35) 0%, transparent 50%),
+        
+        /* [NOVO] Mancha de Nebulosa Inferior Direita (Suave e esfumada) */
+        radial-gradient(circle at 80% 70%, rgba(154, 155, 193, 0.08) 0%, transparent 45%),
+        
+        /* Seu Fundo de Profundidade Espacial com Névoa Original */
+        radial-gradient(circle at 50% 50%, rgba(38, 41, 52, 0.5), var(--bg-space));
+
+    /* Atualizado o mapeamento de tamanhos e posições para incluir as duas manchas de nebulosa */
+    background-size: 
+        280px 280px, 280px 280px, 
+        190px 190px, 190px 190px, 
+        280px 280px, 280px 280px, 280px 280px, 
+        190px 190px, 190px 190px, 190px 190px, 
+        100% 100%, 100% 100%, 100% 100%;
+        
+    background-position: 
+        0 0, 0 0, 
+        70px 110px, 70px 110px, 
+        0 0, 0 0, 0 0, 
+        70px 110px, 70px 110px, 70px 110px, 
+        0 0, 0 0, 0 0;
+        
+    background-attachment: fixed;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.hero-content h2, .manifesto-box h3 {
+    background: linear-gradient(135deg, #ffffff 30%, var(--lavender-glow) 70%, var(--saturn-gold) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 20px rgba(154, 155, 193, 0.15));
+}
+
+/* ==========================================================================
+   EFEITOS DINÂMICOS DE LUXO SOBRE O FUNDO ORIGINAL
+   ========================================================================== */
+.feature-card:hover, .product-item:hover, .login-box:hover, .atelie-container:hover {
+    background: radial-gradient(circle at top right, rgba(238, 228, 187, 0.08) 0%, rgba(154, 155, 193, 0.03) 70%);
+    border-color: var(--saturn-gold);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(238, 228, 187, 0.1);
+    transform: translateY(-5px);
+}
+
+form input:focus, form select:focus {
+    background: rgba(25, 27, 34, 0.9) !important;
+    border-color: var(--saturn-gold) !important;
+    box-shadow: 0 0 25px rgba(238, 228, 187, 0.25), inset 0 0 10px rgba(0,0,0,0.6) !important;
+}
+
+/* ==========================================================================
+   2. DETALHES DE AMBIENTAÇÃO CÓSMICA (NEBULOSAS E SCROLLBAR)
+   ========================================================================== */
+.space-nebula {
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, var(--nebula-purple) 0%, transparent 75%);
+    top: 10%;
+    left: -250px;
+    z-index: -1;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-space);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(var(--bg-space), var(--lavender-glow), var(--saturn-gold));
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--saturn-gold);
+}
+
+/* ==========================================================================
+   3. FÍSICA E ANIMAÇÕES (SISTEMA DE GRAVIDADE ÓRBITAL)
+   ========================================================================== */
+@keyframes moonEclipseGlow {
+    0%, 100% { 
+        box-shadow: 0 0 25px rgba(154, 155, 193, 0.2), inset -15px -15px 40px rgba(0,0,0,0.6);
+    }
+    50% { 
+        box-shadow: 0 0 50px var(--saturn-gold-dim), inset -5px -5px 25px rgba(238, 228, 187, 0.15);
+        border-color: var(--saturn-gold);
+    }
+}
+
+@keyframes planetFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-18px); }
+}
+
+@keyframes ringSpin {
+    0%, 100% { transform: rotate(-13deg) scaleY(1); }
+    50% { transform: rotate(-15deg) scaleY(1.05); }
+}
+
+main {
+    transition: opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1), transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+/* ==========================================================================
+   4. ESTRUTURA DO CABEÇALHO (HEADER ESPACIAL)
+   ========================================================================== */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 6%;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 2000;
+    background: rgba(38, 41, 52, 0.92);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.logo h1 {
+    font-size: 2rem;
+    color: #ffffff;
+    font-style: italic;
+    text-shadow: 0 0 15px var(--saturn-gold-dim);
+}
+
+.logo p {
+    font-size: 0.75rem;
+    color: var(--lavender-glow); 
+    font-family: 'Space Grotesk', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-top: 2px;
+}
+
+nav.desktop-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 45px;
+}
+
+nav ul li a {
+    color: var(--starlight);
+    text-decoration: none;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    position: relative;
+    padding-bottom: 6px;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: var(--saturn-gold);
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--saturn-gold), transparent);
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+/* ==========================================================================
+   5. BOTÕES E BOTÃO HAMBÚRGUER (SISTEMA ANTI-BUG)
+   ========================================================================== */
+button, .btn-space-login {
+    background: transparent;
+    color: var(--starlight);
+    border: 1px solid var(--saturn-gold);
+    padding: 14px 34px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 30px; 
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: 0 0 15px rgba(238, 228, 187, 0.05);
+}
+
+button:hover {
+    color: var(--bg-space);
+    background-color: var(--saturn-gold);
+    box-shadow: 0 0 30px var(--saturn-gold);
+    transform: translateY(-2px);
+}
+
+button[type="button"], .btn-submit-login {
+    position: relative;
+    overflow: hidden;
+}
+
+button[type="button"]::before, .btn-submit-login::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(circle, rgba(238, 228, 187, 0.3) 0%, transparent 70%);
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.6s ease;
+    z-index: -1;
+}
+
+button[type="button"]:hover::before, .btn-submit-login:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.header-actions button.menu-hamburger {
+    all: unset;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 16px;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    cursor: pointer;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+.header-actions button.menu-hamburger span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--lavender-glow);
+    border-radius: 1px;
+    transition: 0.3s ease;
+}
+
+.header-actions button.menu-hamburger:hover span {
+    background-color: var(--saturn-gold);
+    box-shadow: 0 0 8px var(--saturn-gold);
+}
+
+.btn-back-home {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-color: var(--glass-border) !important;
+    font-size: 0.85rem !important;
+    padding: 10px 24px !important;
+    margin-top: 15px;
+}
+
+.btn-back-home:hover {
+    background: var(--saturn-gold) !important;
+    color: var(--bg-space) !important;
+}
+
+/* ==========================================================================
+   6. PAINEL GAVETA LATERAL PREMIUM (LUNAR DESIGN)
+   ========================================================================== */
+.side-panel {
+    position: fixed;
+    top: 0;
+    right: -360px;
+    width: 360px;
+    height: 100%;
+    background: rgba(27, 29, 37, 0.96);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border-left: 1px solid var(--glass-border);
+    z-index: 2500;
+    transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    padding: 45px 35px;
+    box-shadow: -20px 0 50px rgba(0, 0, 0, 0.7);
+}
+
+.side-panel.open {
+    right: 0;
+}
+
+.side-panel .close-btn {
+    all: unset;
+    font-size: 2.5rem;
+    color: var(--lavender-glow);
+    cursor: pointer;
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    line-height: 1;
+    transition: transform 0.3s ease;
+}
+
+.side-panel .close-btn:hover {
+    color: var(--saturn-gold);
+    transform: rotate(90deg);
+}
+
+.panel-content h3 {
+    font-size: 1.6rem;
+    margin-top: 25px;
+    margin-bottom: 35px;
+    color: #ffffff;
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 15px;
+}
+
+.panel-content ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.panel-content ul li a {
+    color: var(--starlight);
+    text-decoration: none;
+    font-size: 1.05rem;
+    display: block;
+    padding: 16px 20px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid var(--glass-border);
+    transition: all 0.3s ease;
+}
+
+.panel-content ul li a:hover {
+    background: var(--glass-bg);
+    border-color: var(--saturn-gold);
+    padding-left: 26px;
+    box-shadow: 0 0 20px var(--saturn-gold-dim);
+}
+/* ==========================================================================
+   7. SEÇÃO HERO, COMPONENTE SATURNO CORRIGIDO E MANIFESTO
+   ========================================================================== */
+main {
+    margin-top: 120px;
+}
+
+section {
+    padding: 140px 8% 100px 8%;
+}
+
+#features h3, #colecoes h3, #Agendamento h3 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 70px;
+}
+
+.hero-section {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    gap: 70px;
+}
+
+.hero-content {
+    width: 100%;
+    max-width: 650px;
+}
+
+.hero-content h2 {
+    font-size: 4.5rem;
+    margin-bottom: 25px;
+    line-height: 1.05;
+}
+
+.hero-content p {
+    font-size: 1.35rem;
+    margin-bottom: 45px;
+    color: var(--lavender-glow);
+    font-weight: 300;
+}
+
+.hero-image-container {
+    position: relative;
+    width: 100%;
+    max-width: 460px; 
+    height: 460px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: planetFloat 7s ease-in-out infinite;
+}
+
+.saturn-ring {
+    position: absolute;
+    width: 140%; 
+    height: 50px;
+    border: 2px solid var(--saturn-gold);
+    border-radius: 50%;
+    z-index: 5; 
+    pointer-events: none;
+    box-shadow: 0 0 25px var(--saturn-gold-dim);
+    animation: ringSpin 7s ease-in-out infinite;
+}
+
+.hero-image {
+    width: 85%;
+    height: 85%;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15) 0%, rgba(154, 155, 193, 0.1) 40%, rgba(0, 0, 0, 0.75) 85%);
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+    padding: 40px; 
+    text-align: center;
+    animation: moonEclipseGlow 9s ease-in-out infinite;
+    z-index: 2; 
+}
+
+.hero-image p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--starlight);
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
+    letter-spacing: 1px;
+    line-height: 1.4; 
+    max-width: 260px; 
+    margin: 0;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 45px;
+}
+
+.feature-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    padding: 50px 35px;
+    border-radius: 20px;
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.feature-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--saturn-gold);
+    box-shadow: 0 15px 35px rgba(238, 228, 187, 0.06);
+}
+
+.feature-card h4 {
+    font-size: 1.8rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.manifesto-box {
+    max-width: 950px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 80px 50px;
+    border-radius: 30px;
+    background: radial-gradient(circle, rgba(53, 42, 85, 0.2) 0%, transparent 85%);
+    border: 1px solid rgba(154, 155, 193, 0.12);
+}
+
+.manifesto-box p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem;
+    line-height: 1.9;
+    font-weight: 300;
+}
+
+/* ==========================================================================
+   8. VITRINE DE LOOKS E ENGENHARIA DE PAGINAÇÃO
+   ========================================================================== */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.galeria-orbital {
+    display: none !important; 
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.galeria-orbital.ativa {
+    display: grid !important;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.product-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    padding: 30px 25px;
+    border-radius: 20px;
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    height: 100%; 
+}
+
+.product-item:hover {
+    transform: translateY(-6px);
+    border-color: var(--saturn-gold);
+    box-shadow: 0 15px 35px rgba(238, 228, 187, 0.06);
+}
+
+.product-thumb {
+    width: 100%;
+    height: 420px; 
+    border-radius: 20px; 
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    transition: transform 0.4s ease, border-color 0.4s ease;
+}
+
+.product-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    object-position: center; 
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.product-item:hover .product-thumb {
+    border-color: var(--saturn-gold);
+    transform: translateY(-10px);
+}
+
+.product-item:hover .product-thumb img {
+    transform: scale(1.06); 
+}
+
+.product-info-block {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; 
+    justify-content: space-between; 
+    width: 100%;
+    margin-top: 15px;
+}
+
+.product-item h4 {
+    font-size: 1.4rem;
+    color: #ffffff;
+    margin-bottom: 12px;
+    min-height: 3.2rem; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-item p {
+    font-size: 0.95rem;
+    color: var(--lavender-glow);
+    font-family: 'Space Grotesk', sans-serif;
+    margin-bottom: 25px;
+    flex-grow: 1; 
+}
+
+.product-item .btn-buy {
+    width: 100%;
+    margin-top: auto; 
+}
+
+.paginacao-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-top: 60px;
+    margin-bottom: 20px;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.btn-paginacao {
+    padding: 12px 28px !important;
+    font-size: 0.9rem !important;
+}
+
+.btn-paginacao:disabled {
+    opacity: 0.2 !important;
+    cursor: not-allowed !important;
+    border-color: var(--glass-border) !important;
+}
+
+.btn-paginacao:disabled:hover {
+    background: transparent !important;
+    color: var(--starlight) !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+.indicador-pagina {
+    color: var(--lavender-glow);
+    font-size: 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+/* ==========================================================================
+   9. PÁGINA INSTITUCIONAL DO ATELIÊ
+   ========================================================================== */
+.atelie-page-section {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.atelie-container {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 32px;
+    padding: 70px 55px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(10px);
+}
+
+.atelie-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.atelie-header h2 {
+    font-size: 4rem;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+.atelie-subtitle {
+    font-size: 1.25rem;
+    color: var(--lavender-glow);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 300;
+}
+
+.atelie-content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 50px;
+    margin-bottom: 60px;
+}
+
+.atelie-text-block h3 {
+    font-size: 2rem;
+    color: var(--saturn-gold);
+    margin-bottom: 20px;
+    border-bottom: 1px dashed rgba(238, 228, 187, 0.2);
+    padding-bottom: 10px;
+}
+
+.atelie-text-block p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #e0e0e0;
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+.atelie-manifesto-highlight {
+    border-left: 3px solid var(--saturn-gold);
+    padding: 25px 40px;
+    background: rgba(53, 42, 85, 0.15);
+    border-radius: 0 20px 20px 0;
+    margin: 40px 0;
+}
+
+.atelie-manifesto-highlight p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-style: italic;
+    line-height: 1.6;
+    color: #ffffff;
+}
+
+/* ==========================================================================
+   10. FORMULÁRIOS CORES E ENTRADAS GALÁCTICAS (AGENDAMENTO E LOGIN SPA)
+   ========================================================================== */
+#Agendamento {
+    max-width: 750px;
+    margin: 80px auto;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 65px 50px;
+}
+
+.agendamento-section {
+    max-width: 750px;
+    margin: 40px auto !important;
+    padding: 65px 50px !important;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.form-subtitle {
+    text-align: center;
+    color: var(--lavender-glow);
+    margin-top: -45px;
+    margin-bottom: 45px;
+    font-size: 1.1rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+form label {
+    font-size: 0.95rem;
+    color: var(--lavender-glow);
+    letter-spacing: 1px;
+}
+
+form input,
+form select {
+    background: rgba(38, 41, 52, 0.85);
+    border: 1px solid var(--glass-border);
+    padding: 18px;
+    color: #fff;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-family: 'Space Grotesk', sans-serif;
+    transition: all 0.3s ease;
+}
+
+form input:focus,
+form select:focus {
+    outline: none;
+    border-color: var(--saturn-gold);
+    box-shadow: 0 0 25px rgba(238, 228, 187, 0.15);
+}
+
+.login-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 75vh;
+    padding: 40px 5%;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 520px;
+    background: radial-gradient(circle at top, rgba(53, 42, 85, 0.15) 0%, var(--glass-bg) 100%);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 28px;
+    padding: 50px 40px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 30px rgba(154, 155, 193, 0.05);
+    position: relative;
+}
+
+.login-box::before {
+    content: '✦';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--saturn-gold);
+    font-size: 1.5rem;
+    text-shadow: 0 0 10px var(--saturn-gold);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.login-header h2 {
+    font-size: 2.8rem;
+    margin-bottom: 12px;
+    color: #ffffff;
+    text-shadow: 0 0 15px var(--saturn-gold-dim), 0 0 30px rgba(255, 255, 255, 0.2);
+}
+
+.login-header p {
+    font-size: 1rem;
+    color: var(--lavender-glow);
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: 0.5px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 22px;
+}
+
+.input-group label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.input-group input {
+    background: rgba(25, 27, 34, 0.75) !important;
+    border: 1px solid var(--glass-border) !important;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5) !important;
+}
+
+.input-group input:focus {
+    border-color: var(--saturn-gold) !important;
+    box-shadow: 0 0 20px var(--saturn-gold-dim), inset 0 0 5px rgba(238, 228, 187, 0.2) !important;
+}
+
+.login-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 25px;
+}
+
+.forgot-password {
+    color: var(--lavender-glow);
+    font-size: 0.9rem;
+    text-decoration: none;
+    font-family: 'Space Grotesk', sans-serif;
+    transition: color 0.3s ease;
+    font-style: italic;
+}
+
+.forgot-password:hover {
+    color: var(--saturn-gold);
+    text-shadow: 0 0 8px var(--saturn-gold-dim);
+}
+
+.btn-submit-login {
+    width: 100%;
+    background-color: transparent;
+    border: 1px solid var(--saturn-gold);
+    color: var(--starlight);
+    padding: 18px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.btn-submit-login:hover {
+    background-color: var(--saturn-gold);
+    color: var(--bg-space);
+    box-shadow: 0 0 30px var(--saturn-gold), 0 0 10px #ffffff;
+    transform: translateY(-2px);
+}
+
+.login-footer {
+    margin-top: 35px;
+    text-align: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    color: var(--lavender-glow);
+    border-top: 1px solid rgba(154, 155, 193, 0.1);
+    padding-top: 25px;
+}
+
+.login-footer a {
+    color: var(--saturn-gold);
+    text-decoration: none;
+    font-weight: 500;
+    text-shadow: 0 0 5px rgba(238, 228, 187, 0.3);
+}
+
+.login-footer a:hover {
+    text-decoration: underline;
+    color: #ffffff;
+}
+
+/* ==========================================================================
+   11. ARQUITETURA DO RODAPÉ (SOLUÇÃO ANTI-BUG REMODELADA)
+   ========================================================================== */
+.main-footer {
+    width: 100%;
+    margin-top: 140px;
+    background: #191b22;
+    border-top: 1px solid var(--glass-border);
+    padding: 70px 8% 40px 8%;
+    position: relative;
+    z-index: 10;
+    clear: both;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 45px;
+    margin-bottom: 50px;
+}
+
+.footer-brand h4 {
+    font-size: 2rem;
+    color: #ffffff;
+    margin-bottom: 15px;
+    font-style: italic;
+}
+
+.footer-brand p {
+    color: var(--lavender-glow);
+    max-width: 420px;
+    font-size: 1.05rem;
+}
+
+.footer-links,
+.footer-socials {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.footer-links a,
+.footer-socials a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    width: max-content;
+}
+
+.footer-links a:hover,
+.footer-socials a:hover {
+    color: var(--saturn-gold);
+    transform: translateX(6px);
+}
+
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid rgba(154, 155, 193, 0.08);
+    padding-top: 35px;
+    font-size: 0.95rem;
+    opacity: 0.5;
+}
+
+/* ==========================================================================
+   12. MEDIA QUERIES (SISTEMA DE RESPONSIVIDADE ADAPTATIVA)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .atelie-container {
+        padding: 40px 25px;
+    }
+    .atelie-header h2 {
+        font-size: 2.8rem;
+    }
+    .atelie-content-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-box {
+        padding: 35px 20px;
+        border-radius: 20px;
+    }
+    
+    .login-header h2 {
+        font-size: 2.2rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .footer-container {
+        grid-template-columns: repeat(3, 1fr);
+        align-items: start;
+    }
+}
+
+@media (min-width: 1024px) {
+    .hero-section {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+    }
+    
+    .hero-content {
+        width: 55%;
+    }
+    
+    .hero-image-container {
+        width: 42%;
+        max-width: 480px;
+        height: 480px;
+    }
+    
+    .hero-content h2 {
+        font-size: 5.4rem;
+    }
+}
+/* ==========================================================================
+   SEÇÃO DE EXPLORAÇÃO (QUIZ + GUIA DE MATERIAIS)
+   ========================================================================== */
+.exploracao-section {
+    padding: 60px 8%;
+    color: #ffffff;
+}
+
+.exploracao-header, .quiz-header, .materiais-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.quiz-card-container {
+    background: rgba(25, 27, 34, 0.75);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 35px;
+    max-width: 650px;
+    margin: 0 auto 60px auto;
+}
+
+.pergunta-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pergunta-group select {
+    background: rgba(15, 16, 22, 0.8);
+    border: 1px solid var(--glass-border);
+    color: #ffffff;
+    padding: 12px 15px;
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.btn-submit-quiz {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--saturn-gold), #c59b27);
+    border: none;
+    border-radius: 10px;
+    color: #121318;
+    font-weight: bold;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    margin-top: 15px;
+}
+
+.btn-submit-quiz:hover {
+    transform: translateY(-2px);
+}
+
+/* Grid do Guia de Materiais */
+.materiais-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.material-card {
+    background: rgba(38, 41, 52, 0.6);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.material-card:hover {
+    border-color: var(--saturn-gold);
+    transform: translateY(-5px);
+}
+
+.material-icon {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.tecido-recomendado-card {
+    background: rgba(0, 0, 0, 0.3);
+    border-left: 4px solid var(--saturn-gold);
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 8px;
+    text-align: left;
+}
+/* --- GUIA DE MATERIAIS EXPANDIDO --- */
+.materiais-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 25px;
+}
+
+.material-card {
+    background: rgba(22, 24, 33, 0.75);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    border-radius: 18px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.35s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.material-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--saturn-gold);
+    box-shadow: 0 12px 30px rgba(212, 175, 55, 0.15);
+}
+
+.material-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.material-badge {
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+}
+
+.material-badge.lendário { background: rgba(255, 0, 128, 0.2); color: #ff3399; border: 1px solid #ff3399; }
+.material-badge.épico { background: rgba(157, 78, 221, 0.2); color: #c77dff; border: 1px solid #c77dff; }
+.material-badge.raro { background: rgba(212, 175, 55, 0.2); color: var(--saturn-gold); border: 1px solid var(--saturn-gold); }
+.material-badge.exclusivo { background: rgba(0, 240, 255, 0.2); color: #00f0ff; border: 1px solid #00f0ff; }
+.material-badge.comum { background: rgba(255, 255, 255, 0.1); color: #ccc; border: 1px solid #666; }
+
+.material-tag {
+    font-size: 0.8rem;
+    color: var(--lavender-glow);
+    font-style: italic;
+}
+
+.material-icon {
+    font-size: 3rem;
+    text-align: center;
+    margin: 10px 0;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+}
+
+.material-card h4 {
+    color: #ffffff;
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.material-desc {
+    font-size: 0.9rem;
+    color: #b3b8c8;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.material-specs-grid {
+    background: rgba(10, 11, 16, 0.5);
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.spec-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.82rem;
+}
+
+.spec-label {
+    color: #8a8f9e;
+}
+
+.spec-value {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.btn-interagir-material {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    color: var(--lavender-glow);
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-interagir-material:hover {
+    background: rgba(212, 175, 55, 0.15);
+    border-color: var(--saturn-gold);
+    color: #ffffff;
+}
+/* ==========================================================================
+   TELA DE DETALHES DO PRODUTO (PEÇA AUTORAL)
+   ========================================================================== */
+   .produto-detalhe-section {
+    padding: 50px 8%;
+    color: #ffffff;
+}
+
+.produto-detalhe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 45px;
+    align-items: start;
+    background: rgba(22, 24, 33, 0.8);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(14px);
+    border-radius: 20px;
+    padding: 35px;
+}
+
+.detalhe-imagem-container {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+}
+
+.detalhe-img-principal {
+    width: 100%;
+    height: 480px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.detalhe-imagem-container:hover .detalhe-img-principal {
+    transform: scale(1.03);
+}
+
+.detalhe-badge-selo {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(15, 16, 22, 0.85);
+    border: 1px solid var(--saturn-gold);
+    color: var(--saturn-gold);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.detalhe-categoria {
+    text-transform: uppercase;
+    font-size: 0.82rem;
+    color: var(--lavender-glow);
+    letter-spacing: 1.5px;
+}
+
+.detalhe-info-container h2 {
+    font-size: 2.2rem;
+    margin: 8px 0 18px 0;
+    color: #ffffff;
+}
+
+.detalhe-preco-box {
+    background: rgba(10, 11, 16, 0.6);
+    padding: 15px 20px;
+    border-radius: 12px;
+    border-left: 4px solid var(--saturn-gold);
+    margin-bottom: 20px;
+}
+
+.preco-label {
+    font-size: 0.85rem;
+    color: #a0a5b5;
+    display: block;
+}
+
+.preco-valor {
+    color: var(--saturn-gold);
+    font-size: 1.5rem;
+    margin-top: 4px;
+}
+
+.detalhe-descricao-longa {
+    line-height: 1.6;
+    color: #cbd0df;
+    font-size: 0.98rem;
+    margin-bottom: 25px;
+}
+
+.detalhe-especificacoes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 15px 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.espec-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #e0e4f0;
+}
+
+.detalhe-acoes-group {
+    display: flex;
+    flex-direction: column;
+}
