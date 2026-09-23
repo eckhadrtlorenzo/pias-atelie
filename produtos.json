@@ -1,128 +1,128 @@
 [
   {
     "id": 1,
-    "titulo": "Manto Eclipse Total",
-    "descricao": "Uma peça autoral em veludo denso com detalhes esculpidos à mão que capturam a escuridão do ápice de um eclipse espacial.",
-    "imagem": "img/vestido barbie.jpeg",
-    "alt": "Manto Eclipse Total"
-  },
-  {
-    "id": 2,
-    "titulo": "Túnica Nebulosa Dourada",
-    "descricao": "Tecida com fios metálicos saturnianos de alto brilho e caimento imponente para festas da alta nobreza sideral.",
-    "imagem": "img/tunica dourada.jpeg",
-    "alt": "Túnica Nebulosa Dourada"
-  },
-  {
-    "id": 3,
-    "titulo": "Corset Poeira de Estrelas",
-    "descricao": "Corpete cravejado de cristais cintilantes que refletem o brilho das constelações mais jovens do universo.",
-    "imagem": "img/corset estelar.jpeg",
-    "alt": "Corset Poeira de Estrelas"
-  },
-  {
-    "id": 4,
     "titulo": "Vestido Eclipse Total",
     "descricao": "Um body translúcido de alta-costura, esculpido com ramos tridimensionais que simulam a flora exótica nascendo no coração de uma galáxia distante.",
     "imagem": "img/conjunto macaquinho.jpeg",
-    "alt": "Vestido Eclipse Total"
+    "alt": "Vestido Eclipse Total",
+    "preco": "R$ 2.100,00",
+    "tempo": "15 Dias Orbitais"
   },
   {
-    "id": 5,
+    "id": 2,
     "titulo": "Terno Alinhamento Astral",
     "descricao": "Para completar o visual, as mangas bufantes removíveis em tule trazem a fluidez dos gases cósmicos, flutuando como a atmosfera etérea dessa nebulosa primaveril.",
     "imagem": "img/macaquinho rosa.jpeg",
-    "alt": "Terno Alinhamento Astral"
+    "alt": "Terno Alinhamento Astral",
+    "preco": "R$ 2.800,00",
+    "tempo": "20 Dias Orbitais"
   },
   {
-    "id": 6,
+    "id": 3,
     "titulo": "Corset Aurora Lunar",
     "descricao": "Vestido sereia rosa-quartzo com corpete estruturado e amarrações imperiais.",
     "imagem": "img/vestido rosa.jpeg",
-    "alt": "Corset Aurora Lunar"
+    "alt": "Corset Aurora Lunar",
+    "preco": "R$ 1.950,00",
+    "tempo": "12 Dias Orbitais"
   },
   {
-    "id": 7,
+    "id": 4,
     "titulo": "Manto Estelar Andromeda",
     "descricao": "Conjunto de alta-costura futurista inspirado na flora exótica de uma nebulosa distante.",
     "imagem": "img/vestido japones.jpeg",
-    "alt": "Manto Estelar Andromeda"
+    "alt": "Manto Estelar Andromeda",
+    "preco": "R$ 3.200,00",
+    "tempo": "25 Dias Orbitais"
   },
   {
-    "id": 8,
+    "id": 5,
     "titulo": "Casaco Horizonte de Eventos",
     "descricao": "Vestido de gala esculpido no preto absoluto do horizonte de eventos de um buraco negro.",
     "imagem": "img/vestido negro.jpeg",
-    "alt": "Casaco Horizonte de Eventos"
+    "alt": "Casaco Horizonte de Eventos",
+    "preco": "R$ 2.450,00",
+    "tempo": "18 Dias Orbitais"
   },
   {
-    "id": 9,
+    "id": 6,
     "titulo": "Mangas Nebulosa de Primavera",
     "descricao": "Vestido de gala bicolor esculpido no contraste absoluto entre a luz estelar e o vazio do espaço.",
     "imagem": "img/vestido branco.jpeg",
-    "alt": "Mangas Nebulosa de Primavera"
+    "alt": "Mangas Nebulosa de Primavera",
+    "preco": "R$ 1.600,00",
+    "tempo": "10 Dias Orbitais"
   },
   {
-    "id": 10,
+    "id": 7,
     "titulo": "Capa Nebulosa Escura",
     "descricao": "Terno unissex de alta-costura sci-fi desenhado com fechos ornamentais para a alta sociedade do universo.",
     "imagem": "img/terno beje.jpeg",
-    "alt": "Capa Nebulosa Escura"
+    "alt": "Capa Nebulosa Escura",
+    "preco": "R$ 2.900,00",
+    "tempo": "22 Dias Orbitais"
   },
   {
-    "id": 11,
+    "id": 8,
     "titulo": "Túnica Gravidade Zero",
     "descricao": "Traje de gala espacial estruturado com correntes de titânio estelar e amarrações que desafiam a gravidade.",
     "imagem": "img/terno branco e vermelho.jpeg",
-    "alt": "Túnica Gravidade Zero"
+    "alt": "Túnica Gravidade Zero",
+    "preco": "R$ 3.100,00",
+    "tempo": "20 Dias Orbitais"
   },
   {
-    "id": 12,
+    "id": 9,
     "titulo": "Diadema Estelar",
-    "descricao": "Sobretudo longo em veludo carmesim profundo inspirado no brilho intenso de uma estrela anâ vermelha.",
+    "descricao": "Sobretudo longo em veludo carmesim profundo inspirado no brilho intenso de uma estrela anã vermelha.",
     "imagem": "img/terno vermelho.jpeg",
-    "alt": "Diadema Estelar"
+    "alt": "Diadema Estelar",
+    "preco": "R$ 2.750,00",
+    "tempo": "15 Dias Orbitais"
   },
   {
-    "id": 13,
+    "id": 10,
     "titulo": "Vestido Radiação Cósmica",
     "descricao": "Traje diplomático cósmico rico em detalhes metálicos e punhos brocados que simulam relíquias de uma antiga galáxia.",
     "imagem": "img/terno azul escuro.jpeg",
-    "alt": "Vestido Radiação Cósmica"
+    "alt": "Vestido Radiação Cósmica",
+    "preco": "R$ 3.500,00",
+    "tempo": "30 Dias Orbitais"
   },
   {
-    "id": 14,
+    "id": 11,
     "titulo": "Smoking Anéis de Saturno",
     "descricao": "Malha celestial tecida com a própria essência do firmamento noturno.",
     "imagem": "img/xale.jpeg",
-    "alt": "Smoking Anéis de Saturno"
+    "alt": "Smoking Anéis de Saturno",
+    "preco": "R$ 1.800,00",
+    "tempo": "14 Dias Orbitais"
   },
   {
-    "id": 15,
+    "id": 12,
     "titulo": "Ombreiras Cinturão de Asteroides",
     "descricao": "Colete de alta-costura em jacquard azul-noturno com arabescos que imitam órbitas de uma galáxia antiga.",
     "imagem": "img/corset verde masc.jpeg",
-    "alt": "Ombreiras Cinturão de Asteroides"
+    "alt": "Ombreiras Cinturão de Asteroides",
+    "preco": "R$ 1.450,00",
+    "tempo": "10 Dias Orbitais"
   },
   {
-    "id": 16,
-    "titulo": "Vestido Supernova Carmesim",
-    "descricao": "Traje de gala que brilha intensamente imitando a explosão de uma estrela moribunda em tons de vermelho e dourado.",
-    "imagem": "img/vestido supernova.jpeg",
-    "alt": "Vestido Supernova Carmesim"
+    "id": 13,
+    "titulo": "Túnica Nebulosa Dourada",
+    "descricao": "Tecida com fios metálicos saturnianos de alto brilho e caimento imponente.",
+    "imagem": "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600&auto=format&fit=crop",
+    "alt": "Túnica Nebulosa Dourada",
+    "preco": "R$ 3.400,00",
+    "tempo": "25 Dias Orbitais"
   },
   {
-    "id": 17,
-    "titulo": "Sobretudo Vento Solar",
-    "descricao": "Casaco leve e reflexivo feito com tecidos inteligentes que mudam de coloração conforme a iluminação das estrelas próximas.",
-    "imagem": "img/sobretudo vento.jpeg",
-    "alt": "Sobretudo Vento Solar"
-  },
-  {
-    "id": 18,
-    "titulo": "Traje Singularidade Quântica",
-    "descricao": "Macacão minimalista costurado com linhas magnéticas invisíveis que moldam o corpo com perfeição no espaço sideral.",
-    "imagem": "img/traje singularidade.jpeg",
-    "alt": "Traje Singularidade Quântica"
+    "id": 14,
+    "titulo": "Manto Via Láctea Cristais",
+    "descricao": "Seda fluida com bordados manuais reluzentes inspirados em galáxias distantes.",
+    "imagem": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&auto=format&fit=crop",
+    "alt": "Manto Via Láctea Cristais",
+    "preco": "R$ 4.200,00",
+    "tempo": "30 Dias Orbitais"
   }
 ]

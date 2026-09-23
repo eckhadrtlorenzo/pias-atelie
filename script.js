@@ -1,85 +1,19 @@
-/* ==========================================================================
-   1. VARIÁVEIS GLOBAIS E BASE DE DADOS
-   ========================================================================== */
 
-// Variável global para armazenar a lista de produtos carregada do JSON
+// ==========================================
+// 1. VARIÁVEIS GLOBAIS E BASE DE DADOS
+// ==========================================
+
+const API_URL = 'http://localhost:3000/api';
 let produtosGlobais = [];
 
-// Contadores para simular IDs incrementais do SQLite
-let proximoIdCliente = 7; 
-let proximoIdAgendamento = 5;
-
-// Base de dados do Guia de Materiais
-const materiaisCelestine = [
-    {
-        id: "misterio",
-        nome: "Veludo Negro de Buraco Negro",
-        icone: "🌑",
-        tag: "Alta Densidade",
-        descricao: "Tecido de estrutura densa capaz de absorver 99% da luz ambiente. Projetado para trajes de alta imponência e presença marcante.",
-        caimento: "Estruturado / Pesado",
-        origem: "Órbita de Cygnus X-1",
-        brilho: "0% (Absorção Total)",
-        raridade: "Lendário"
-    },
-    {
-        id: "brilho",
-        nome: "Jacquard de Ouro Saturniano",
-        icone: "🪐",
-        tag: "Fios Metálicos",
-        descricao: "Fios de titânio e microcristais trançados com fibras nobres. Reflete gradientes dourados vibrantes conforme a luz do ambiente oscila.",
-        caimento: "Rígido / Imponente",
-        origem: "Anéis Internos de Saturno",
-        brilho: "95% (Reflexo Angular)",
-        raridade: "Raro"
-    },
-    {
-        id: "fluidez",
-        nome: "Seda Flutuante de Nebulosa",
-        icone: "✨",
-        tag: "Gravidade Zero",
-        descricao: "Seda ultraleve e translúcida que responde ao menor fluxo de ar, simulação visual contínua de gases cósmicos em flutuação.",
-        caimento: "Esvoaçante / Ultra Leve",
-        origem: "Nebulosa de Órion",
-        brilho: "60% (Suave / Etéreo)",
-        raridade: "Épico"
-    },
-    {
-        id: "plasma",
-        nome: "Manta Magnética Aurora",
-        icone: "🌌",
-        tag: "Termocrômico",
-        descricao: "Tecido inteligente que altera sua tonalidade entre tons de lavanda e ciano de acordo com a temperatura corporal do tripulante.",
-        caimento: "Moldável / Ajustável",
-        origem: "Magnetosfera Polar",
-        brilho: "80% (Iridescente)",
-        raridade: "Exclusivo"
-    },
-    {
-        id: "cristal",
-        nome: "Tule de Poeira Estelar",
-        icone: "💎",
-        tag: "Transparência",
-        descricao: "Tule finíssimo incrustado com micropartículas de quartzo estelar. Cria uma ilusão de constelações flutuando sobre a pele.",
-        caimento: "Vaporoso / Delicado",
-        origem: "Cinturão de Kuiper",
-        brilho: "100% (Ponto de Luz)",
-        raridade: "Raro"
-    },
-    {
-        id: "couro",
-        nome: "Couro Sintético de Asteroide",
-        icone: "☄️",
-        tag: "Escudo Térmico",
-        descricao: "Textura em relevo tridimensional com acabamento fosco. Oferece visual futurista urbano e proteção contra variações térmicas.",
-        caimento: "Firme / Esculpido",
-        origem: "Ateliê Orbital 09",
-        brilho: "15% (Acabamento Satim)",
-        raridade: "Comum"
+// Função do Menu Lateral
+function toggleMenu() {
+    const sidePanel = document.getElementById('sidePanel');
+    if (sidePanel) {
+        sidePanel.classList.toggle('open');
     }
-];
+}
 
-// Mapeamento das estruturas HTML das telas
 const telasCelestine = {
     'orbita': null, 
     
@@ -92,14 +26,14 @@ const telasCelestine = {
                 </div>
                 <form id="form-login" onsubmit="autenticarTripulante(event)">
                     <div class="input-group">
+                        <label for="login-nome">👤 Nome do Tripulante</label>
+                        <input type="text" id="login-nome" required placeholder="Comandante Silva">
+                    </div>
+                    <div class="input-group">
                         <label for="login-email">📡 Frequência Digital Coordenada (E-mail)</label>
                         <input type="email" id="login-email" required placeholder="comandante@galaxia.com">
                     </div>
-                    <div class="input-group">
-                        <label for="login-password">🔑 Chave Criptográfica Estelar (Senha)</label>
-                        <input type="password" id="password" required placeholder="••••••••">
-                    </div>
-                    <button type="submit" class="btn-submit-login">Autenticar Assinatura</button>
+                    <button type="submit" class="btn-submit-login">Cadastrar / Autenticar Assinatura</button>
                 </form>
                 <div class="login-footer">
                     <button class="btn-back-home" onclick="mudarTela('orbita')">🪐 Retornar à Órbita Inicial</button>
@@ -240,6 +174,7 @@ const telasCelestine = {
             <div class="materiais-guia-container">
                 <div class="materiais-header">
                     <h3>🧪 Enciclopédia de Tecidos & Matéria-Prima</h3>
+
                     <p>Conheça a física e o caimento dos tecidos raros tecidos no ateliê.</p>
                 </div>
 
@@ -250,16 +185,61 @@ const telasCelestine = {
                 <button class="btn-back-home" onclick="mudarTela('orbita')">🪐 Retornar à Órbita Inicial</button>
             </div>
         </section>
+    `,
+  
+    'admin': `
+        <section class="agendamento-section" style="max-width: 600px; margin: 40px auto;">
+            <h3>🪐 Hangar de Criação: Cadastrar Manto</h3>
+            <p class="form-subtitle">Adicione novas peças autorais diretamente no banco de dados SQLite.</p>
+            
+            <form id="form-cadastro-manto" onsubmit="transmitirNovoManto(event)">
+                <label for="cad-titulo">Nome do Manto Estelar:</label>
+                <input type="text" id="cad-titulo" name="titulo" required placeholder="Ex: Smoking Anéis de Saturno">
+
+                <label for="cad-descricao">Descrição Conceitual:</label>
+                <input type="text" id="cad-descricao" name="descricao" required placeholder="Ex: Tecida com fios metálicos saturnianos...">
+
+                <label for="cad-preco">Investimento (Preço):</label>
+                <input type="text" id="cad-preco" name="preco" required placeholder="Ex: R$ 2.450,00">
+
+                <label for="cad-tempo">Tempo de Confecção:</label>
+                <input type="text" id="cad-tempo" name="tempo" required placeholder="Ex: 15 Dias Orbitais">
+
+                <label for="cad-foto">Fotografia do Traje (Arquivo):</label>
+                <input type="file" id="cad-foto" name="foto" accept="image/*" required style="padding: 10px; background: rgba(0,0,0,0.2);">
+
+                <button type="submit" class="btn-submit-quiz">🚀 Lançar Manto na Vitrine</button>
+            </form>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="btn-back-home" onclick="mudarTela('orbita')">🪐 Retornar à Órbita Inicial</button>
+            </div>
+        </section>
     `
+
 };
 
-/* ==========================================================================
-   2. INICIALIZAÇÃO E GERENCIAMENTO DE TELAS
-   ========================================================================== */
+// ==========================================
+// 2. INICIALIZAÇÃO E GERENCIAMENTO DE TELAS
+// ==========================================
 
 document.addEventListener("DOMContentLoaded", () => {
-    telasCelestine['orbita'] = document.querySelector('main').innerHTML;
+    const mainEl = document.querySelector('main');
+    if (mainEl) {
+        telasCelestine['orbita'] = mainEl.innerHTML;
+    }
     configurarGatilhosNavegacao();
+    
+    // Atualizar os links do menu lateral
+    const linkPedidos = document.querySelector('aside#sidePanel a[href="#pedidos"]');
+    if (linkPedidos) {
+        linkPedidos.setAttribute('onclick', "event.preventDefault(); abrirCaixaDePedidos();");
+    }
+
+    const linkClientes = document.querySelector('aside#sidePanel a[href="#clientes"]');
+    if (linkClientes) {
+        linkClientes.setAttribute('onclick', "event.preventDefault(); abrirCaixaDeClientes();");
+    }
 });
 
 function configurarGatilhosNavegacao() {
@@ -313,9 +293,9 @@ function mudarTela(nomeDaTela) {
     }
 }
 
-/* ==========================================================================
-   3. MÓDULO: COLEÇÕES E DETALHES DO PRODUTO
-   ========================================================================== */
+// ==========================================
+// 3. COLEÇÕES E DETALHES DO PRODUTO
+// ==========================================
 
 async function carregarMantosDoJson() {
     try {
@@ -473,9 +453,9 @@ function acionarAtendimentoPersonalizado(nomeProduto) {
     window.open(urlWhatsapp, '_blank');
 }
 
-/* ==========================================================================
-   4. MÓDULO: EXPLORAÇÃO, QUIZ E MATERIAIS
-   ========================================================================== */
+// ==========================================
+// 4. EXPLORAÇÃO, QUIZ E MATERIAIS
+// ==========================================
 
 function carregarGuiaMateriais() {
     const grid = document.getElementById('grid-materiais');
@@ -576,61 +556,68 @@ function refazerQuiz() {
     document.getElementById('form-quiz').reset();
 }
 
-/* ==========================================================================
-   5. MÓDULO: FORMULÁRIOS E AUTENTICAÇÃO
-   ========================================================================== */
+// ==========================================
+// 5. ENVIO DE FORMULÁRIOS & AUTENTICAÇÃO
+// ==========================================
 
-function processarAgendamentoEspacial(event) {
+// Enviar pedido para o banco de dados SQLite
+async function processarAgendamentoEspacial(event) {
     event.preventDefault();
 
     const nome = document.getElementById('nome').value;
     const email = document.getElementById('email').value;
     const estilo = document.getElementById('Estilo').value;
 
-    const dadosClienteSimulados = {
-        id_cliente: proximoIdCliente++,
-        nome_cliente: nome,
-        frequencia_digital: email
-    };
+    try {
+        const resposta = await fetch(`${API_URL}/pedidos`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nome, email, estilo })
+        });
 
-    const dadosAgendamentoSimulados = {
-        id_agendamento: proximoIdAgendamento++,
-        cliente_id: dadosClienteSimulados.id_cliente,
-        armadura_escolhida: estilo,
-        data_sinal: new Date().toLocaleDateString('pt-BR'),
-        status_missao: 'Pendente'
-    };
+        const dados = await resposta.json();
 
-    let estiloFormatado = '';
-    if (estilo === 'minimalista') estiloFormatado = '🌘 Eclipse (Minimalista e Escuro)';
-    if (estilo === 'brilhante') estiloFormatado = '🪐 Saturniano (Anéis e Camadas)';
-    if (estilo === 'futurista') estiloFormatado = '✨ Via Láctea (Brilho Máximo e Cristais)';
-
-    alert(
-        `🚀 [CONEXÃO SQLITE SIMULADA COM SUCESSO]\n\n` +
-        `• id_agendamento: ${dadosAgendamentoSimulados.id_agendamento}\n` +
-        `• id_cliente: ${dadosClienteSimulados.id_cliente}\n` +
-        `• nome_cliente: ${dadosClienteSimulados.nome_cliente}\n` +
-        `• frequencia_digital: ${dadosClienteSimulados.frequencia_digital}\n` +
-        `• armadura_escolhida: ${estiloFormatado}\n` +
-        `• status_missao: ${dadosAgendamentoSimulados.status_missao}`
-    );
-
-    mudarTela('orbita');
+        if (resposta.ok) {
+            alert('🚀 Pedido gravado no banco SQLite com sucesso!');
+            mudarTela('orbita');
+        } else {
+            alert(`❌ Erro ao salvar o pedido: ${dados.erro || 'Erro desconhecido'}`);
+        }
+    } catch (erro) {
+        alert('❌ Falha na conexão com o servidor Node.js.');
+    }
 }
 
-function autenticarTripulante(event) {
+// Cadastrar / Autenticar cliente no SQLite
+async function autenticarTripulante(event) {
     event.preventDefault();
+    const nome = document.getElementById('login-nome').value;
     const email = document.getElementById('login-email').value;
-    alert(`Tripulante ${email} autenticado com sucesso!`);
-    mudarTela('orbita');
+
+    try {
+        const resposta = await fetch(`${API_URL}/clientes`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nome, email })
+        });
+
+        const dados = await resposta.json();
+
+        if (resposta.ok) {
+            alert(`⚡ Tripulante ${nome} cadastrado/autenticado com sucesso!`);
+            mudarTela('orbita');
+        } else {
+            alert(`⚠️ aviso: ${dados.erro}`);
+        }
+    } catch (erro) {
+        alert('❌ Falha ao conectar ao servidor Node.js.');
+    }
 }
 
-/* ==========================================================================
-   6. EFEITOS VISUAIS E ANIMAÇÕES
-   ========================================================================== */
+// ==========================================
+// 6. EFEITOS VISUAIS E ANIMAÇÕES
+// ==========================================
 
-// Efeito de rolagem no cabeçalho
 window.addEventListener('scroll', () => {
     const header = document.querySelector('header');
     if (!header) return;
@@ -648,7 +635,6 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Rastro de Fótons Estelares no cursor
 document.addEventListener('mousemove', (e) => {
     const star = document.createElement('div');
     star.innerHTML = '✦';
@@ -674,3 +660,118 @@ document.addEventListener('mousemove', (e) => {
         star.remove();
     }, 800);
 });
+
+// ==========================================
+// 7. CONSULTAS AO BANCO DE DADOS (MODAIS)
+// ==========================================
+
+// --- CONSULTA DE PEDIDOS ---
+async function abrirCaixaDePedidos() {
+    toggleMenu(); 
+    const modal = document.getElementById('modalPedidos');
+    if (modal) modal.style.display = 'flex';
+
+    await carregarPedidosDoBanco();
+}
+
+function fecharModalPedidos() {
+    const modal = document.getElementById('modalPedidos');
+    if (modal) modal.style.display = 'none';
+}
+
+async function carregarPedidosDoBanco() {
+    const container = document.getElementById('lista-pedidos-container');
+    if (!container) return;
+
+    try {
+        const resposta = await fetch(`${API_URL}/pedidos`);
+        const pedidos = await resposta.json();
+
+        if (pedidos.length === 0) {
+            container.innerHTML = '<p style="text-align:center; padding: 20px;">Nenhum pedido registrado no cosmos ainda.</p>';
+            return;
+        }
+
+        container.innerHTML = pedidos.map(p => `
+            <div class="card-pedido-item">
+                <div class="pedido-id">#${p.id}</div>
+                <div class="pedido-dados">
+                    <strong>${p.nome_cliente}</strong>
+                    <span>📡 ${p.email}</span>
+                    <small>✨ Estilo: ${p.estilo}</small>
+                </div>
+                <span class="badge-status ${p.status ? p.status.toLowerCase() : 'pendente'}">${p.status || 'Pendente'}</span>
+            </div>
+        `).join('');
+    } catch (erro) {
+        container.innerHTML = '<p style="color: #ff6b6b; text-align: center;">Erro ao conectar com o banco SQLite. O servidor Node está rodando?</p>';
+    }
+}
+
+// --- CONSULTA DE CLIENTES ---
+async function abrirCaixaDeClientes() {
+    if (typeof toggleMenu === 'function') toggleMenu();
+    const modal = document.getElementById('modalClientes');
+    if (modal) modal.style.display = 'flex';
+
+    await carregarClientesDoBanco();
+}
+
+function fecharModalClientes() {
+    const modal = document.getElementById('modalClientes');
+    if (modal) modal.style.display = 'none';
+}
+
+async function carregarClientesDoBanco() {
+    const container = document.getElementById('lista-clientes-container');
+    if (!container) return;
+
+    try {
+        const resposta = await fetch(`${API_URL}/clientes`);
+        const clientes = await resposta.json();
+
+        if (!clientes.length) {
+            container.innerHTML = '<p style="text-align:center; padding: 20px;">Nenhum cliente cadastrado no site ainda.</p>';
+            return;
+        }
+
+        container.innerHTML = clientes.map(c => `
+            <div class="card-pedido-item">
+                <div class="pedido-id">#${c.id}</div>
+                <div class="pedido-dados">
+                    <strong>${c.nome}</strong>
+                    <span>✉️ E-mail: ${c.email}</span>
+                </div>
+            </div>
+        `).join('');
+    } catch (erro) {
+        container.innerHTML = '<p style="color: #ff6b6b; text-align: center;">Erro ao consultar a lista de clientes.</p>';
+    }
+}
+// Função para enviar o formulário com a foto para o Back-end
+async function transmitirNovoManto(event) {
+    event.preventDefault();
+
+    const form = document.getElementById('form-cadastro-manto');
+    // O FormData captura os textos e o arquivo de imagem perfeitamente para o Multer ler
+    const dadosFormulario = new FormData(form);
+
+    try {
+        const resposta = await fetch(`${API_URL}/produtos`, {
+            method: 'POST',
+            body: dadosFormulario // Enviado diretamente sem JSON.stringify
+        });
+
+        const resultado = await resposta.json();
+
+        if (resposta.ok) {
+            alert(`✨ Sucesso! O manto "${resultado.titulo}" foi eternizado no SQLite e salvo na pasta img!`);
+            form.reset();
+            mudarTela('colecoes'); // Redireciona para ver as coleções
+        } else {
+            alert(`⚠️ Falha orbital: ${resultado.erro}`);
+        }
+    } catch (erro) {
+        alert('❌ Falha na conexão com o servidor de alta costura.');
+    }
+}

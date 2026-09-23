@@ -5,44 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Celestine Ateliê - Alta Costura Interestelar</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-    <script src="produtos.js"></script>
+    <script src="script.js" defer></script>
+    <script src="produtos.js" defer></script>
 </head>
 <body>
 
-    <!-- MÁSCARA DE FUNDO (EFEITO ECLIPSE LUNAR CORES) -->
+    <!-- MÁSCARA DE FUNDO -->
     <div class="space-nebula"></div>
-
-    <!-- PAINEL LATERAL (MENU ACESSÓRIO GAVETA) -->
-    <aside id="sidePanel" class="side-panel">
-        <button class="close-btn" onclick="toggleMenu()" aria-label="Fechar menu">&times;</button>
-        <div class="panel-content">
-            <h3>🧭 Painel de Controle</h3>
-            <ul>
-                <li><a href="#pedidos">📦 Caixa de Pedidos</a></li>
-                <li><a href="#mais-vendidos">👑 Mais Vendidos (Clientes)</a></li>
-                <li><a href="#provador">🪐 Provador de Saturno 3D</a></li>
-            </ul>
-        </div>
-    </aside>
-
+<!-- PAINEL LATERAL -->
+<!-- PAINEL LATERAL -->
+<aside id="sidePanel" class="side-panel">
+    <button class="close-btn" onclick="toggleMenu()" aria-label="Fechar menu">&times;</button>
+    <div class="panel-content">
+        <h3>🧭 Painel de Controle</h3>
+        <ul>
+            <li><a href="#pedidos" onclick="event.preventDefault(); abrirCaixaDePedidos();">📦 Caixa de Pedidos</a></li>
+            <li><a href="#mais-vendidos">👑 Mais Vendidos (Clientes)</a></li>
+            <li><a href="#provador">🪐 Provador de Saturno 3D</a></li>
+            <li><a href="#clientes" onclick="event.preventDefault(); abrirCaixaDeClientes();">👤 Clientes Registrados</a></li>
+        </ul>
+    </div>
+</aside>
     <!-- CABEÇALHO / NAVEGAÇÃO -->
     <header>
         <div class="logo">
             <h1>Celestine Ateliê</h1>
             <p>✂️ Alta Costura Orbital</p>
         </div>
-                <nav class="desktop-nav">
-                    <ul>
-                        <li><a href="#inicio">Órbita</a></li>
-                        <li><a href="#colecoes">Coleções</a></li>
-                        <li><a href="#atelie">O Ateliê</a></li>
-                        <!-- Alterado aqui para indicar que se trata do agendamento de pedidos -->
-                        <li><a href="#Agendamento">Ciclos Lunares (Pedidos)</a></li> 
-                        <li><a href="#Exploracao">Exploração</a></li> 
-                    </ul>
-                </nav>
-        
+        <nav class="desktop-nav">
+            <ul>
+                <li><a href="#inicio">Órbita</a></li>
+                <li><a href="#colecoes">Coleções</a></li>
+                <li><a href="#atelie">O Ateliê</a></li>
+                <li><a href="#Agendamento">Ciclos Lunares (Pedidos)</a></li> 
+                <li><a href="#Exploracao">Exploração</a></li> 
+            </ul>
+        </nav>
 
         <div class="header-actions">
             <button class="menu-hamburger" onclick="toggleMenu()" aria-label="Abrir menu">
@@ -56,7 +54,7 @@
 
     <!-- CONTEÚDO PRINCIPAL -->
     <main>
-        <!-- SEÇÃO HERO (BOAS-VINDAS) -->
+        <!-- SEÇÃO HERO -->
         <section id="inicio" class="hero-section">
             <div class="hero-content">
                 <h2>Vista o Universo</h2>
@@ -71,7 +69,7 @@
             </div>
         </section>
 
-        <!-- SEÇÃO DE RECURSOS / DIFERENCIAIS -->
+        <!-- SEÇÃO DE RECURSOS -->
         <section id="features">
             <h3>🪐 Matéria prima-estelar</h3>
             <div class="feature-grid">
@@ -93,7 +91,6 @@
         <!-- SEÇÃO DE VITRINE / COLEÇÕES -->
         <section id="colecoes">
             <h3>🧵 Alfaiataria Cósmica: Acervo de Prêt-à-Porter</h3>
-
             <div class="gallery">
                 <article class="product-item">
                     <div class="product-thumb">
@@ -123,12 +120,37 @@
         <section id="atelie">
             <div class="manifesto-box">
                 <h3>📜 O Manifesto Celestine</h3>
-                <p>Nascemos sob a ideia de que a moda não deve ser terrena. O Celestine Ateliê une o mistério do universe profundo à sofisticação da alfaiataria. Cada peça é uma constelação única, feita sob medida para quem não tem medo de orbitar em alta sociedade.</p>
+                <p>Nascemos sob a ideia de que a moda não deve ser terrena. O Celestine Ateliê une o mistério do universo profundo à sofisticação da alfaiataria. Cada peça é uma constelação única, feita sob medida para quem não tem medo de orbitar em alta sociedade.</p>
             </div>
         </section>
+        <!-- MODAL DA CAIXA DE PEDIDOS -->
+<div id="modalPedidos" class="modal-pedidos" style="display: none;">
+    <div class="modal-conteudo">
+        <div class="modal-header">
+            <h3>📦 Caixa de Pedidos Registrados</h3>
+            <button class="btn-fechar" onclick="fecharModalPedidos()">&times;</button>
+        </div>
+        <div id="lista-pedidos-container" class="pedidos-lista">
+            <p>Carregando registros estelares...</p>
+        </div>
+    </div>
+</div> <!-- Fechamento correto do modalPedidos -->
+
+<!-- MODAL DE CONSULTA DE CLIENTES -->
+<div id="modalClientes" class="modal-pedidos" style="display: none;">
+    <div class="modal-conteudo">
+        <div class="modal-header">
+            <h3>👤 Clientes Cadastrados no Site</h3>
+            <button class="btn-fechar" onclick="fecharModalClientes()">&times;</button>
+        </div>
+        <div id="lista-clientes-container" class="pedidos-lista">
+            <p>Buscando clientes registrados...</p>
+        </div>
+    </div>
+</div>
     </main>
 
-    <!-- RODAPÉ CORRIGIDO E AMPLIADO -->
+    <!-- RODAPÉ -->
     <footer class="main-footer">
         <div class="footer-container">
             <div class="footer-brand">
@@ -149,12 +171,5 @@
         </div>
     </footer>
 
-    <!-- INTERATIVIDADE DO MENU -->
-    <script>
-        function toggleMenu() {
-            const sidePanel = document.getElementById('sidePanel');
-            sidePanel.classList.toggle('open');
-        }
-    </script>
 </body>
 </html>
