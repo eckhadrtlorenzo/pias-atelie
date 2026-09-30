@@ -124,5 +124,41 @@
     "alt": "Manto Via Láctea Cristais",
     "preco": "R$ 4.200,00",
     "tempo": "30 Dias Orbitais"
+  },
+  {
+    "id": 15,
+    "titulo": "Vestido Radiação Cósmica",
+    "descricao": "Traje diplomático cósmico rico em detalhes metálicos e punhos brocados que simulam relíquias de uma antiga galáxia.",
+    "imagem": "img/terno azul escuro.jpeg",
+    "alt": "Vestido Radiação Cósmica",
+    "preco": "R$ 3.500,00",
+    "tempo": "30 Dias Orbitais"
+  },
+  {
+    "id": 16,
+    "titulo": "Smoking Anéis de Saturno",
+    "descricao": "Malha celestial tecida com a própria essência do firmamento noturno.",
+    "imagem": "img/xale.jpeg",
+    "alt": "Smoking Anéis de Saturno",
+    "preco": "R$ 1.800,00",
+    "tempo": "14 Dias Orbitais"
+  },
+  {
+    "id": 17,
+    "titulo": "Ombreiras Cinturão de Asteroides",
+    "descricao": "Colete de alta-costura em jacquard azul-noturno com arabescos que imitam órbitas de uma galáxia antiga.",
+    "imagem": "img/corset verde masc.jpeg",
+    "alt": "Ombreiras Cinturão de Asteroides",
+    "preco": "R$ 1.450,00",
+    "tempo": "10 Dias Orbitais"
+  },
+  {
+    "id": 18,
+    "titulo": "Túnica Nebulosa Dourada",
+    "descricao": "Tecida com fios metálicos saturnianos de alto brilho e caimento imponente.",
+    "imagem": "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600&auto=format&fit=crop",
+    "alt": "Túnica Nebulosa Dourada",
+    "preco": "R$ 3.400,00",
+    "tempo": "25 Dias Orbitais"
   }
 ]
