@@ -1,4 +1,3 @@
-
 // ==========================================
 // 1. VARIÁVEIS GLOBAIS E BASE DE DADOS
 // ==========================================
@@ -14,9 +13,126 @@ function toggleMenu() {
     }
 }
 
+const materiaisCelestine = [
+    {
+        id: "misterio",
+        nome: "Veludo Negro de Buraco Negro",
+        icone: "🌑",
+        tag: "Alta Densidade",
+        descricao: "Tecido de estrutura densa capaz de absorver 99% da luz ambiente. Projetado para trajes de alta imponência e presença marcante.",
+        caimento: "Estruturado / Pesado",
+        origem: "Órbita de Cygnus X-1",
+        brilho: "0% (Absorção Total)",
+        raridade: "Lendário"
+    },
+    {
+        id: "brilho",
+        nome: "Jacquard de Ouro Saturniano",
+        icone: "🪐",
+        tag: "Fios Metálicos",
+        descricao: "Fios de titânio e microcristais trançados com fibras nobres. Reflete gradientes dourados vibrantes conforme a luz do ambiente oscila.",
+        caimento: "Rígido / Imponente",
+        origem: "Anéis Internos de Saturno",
+        brilho: "95% (Reflexo Angular)",
+        raridade: "Raro"
+    },
+    {
+        id: "fluidez",
+        nome: "Seda Flutuante de Nebulosa",
+        icone: "✨",
+        tag: "Gravidade Zero",
+        descricao: "Seda ultraleve e translúcida que responde ao menor fluxo de ar, simulação visual contínua de gases cósmicos em flutuação.",
+        caimento: "Esvoaçante / Ultra Leve",
+        origem: "Nebulosa de Órion",
+        brilho: "60% (Suave / Etéreo)",
+        raridade: "Épico"
+    },
+    {
+        id: "plasma",
+        nome: "Manta Magnética Aurora",
+        icone: "🌌",
+        tag: "Termocrômico",
+        descricao: "Tecido inteligente que altera sua tonalidade entre tons de lavanda e ciano de acordo com a temperatura corporal do tripulante.",
+        caimento: "Moldável / Ajustável",
+        origem: "Magnetosfera Polar",
+        brilho: "80% (Iridescente)",
+        raridade: "Exclusivo"
+    },
+    {
+        id: "cristal",
+        nome: "Tule de Poeira Estelar",
+        icone: "💎",
+        tag: "Transparência",
+        descricao: "Tule finíssimo incrustado com micropartículas de quartzo estelar. Cria uma ilusão de constelações flutuando sobre a pele.",
+        caimento: "Vaporoso / Delicado",
+        origem: "Cinturão de Kuiper",
+        brilho: "100% (Ponto de Luz)",
+        raridade: "Raro"
+    },
+    {
+        id: "couro",
+        nome: "Couro Sintético de Asteroide",
+        icone: "☄️",
+        tag: "Escudo Térmico",
+        descricao: "Textura em relevo tridimensional com acabamento fosco. Oferece visual futurista urbano e proteção contra variações térmicas.",
+        caimento: "Firme / Esculpido",
+        origem: "Ateliê Orbital 09",
+        brilho: "15% (Acabamento Satim)",
+        raridade: "Comum"
+    }
+];
+
 const telasCelestine = {
     'orbita': null, 
-    
+    'admin' : `
+    <section class="admin-dashboard-section" style="padding: 20px; max-width: 1200px; margin: 0 auto;">
+        <div class="admin-header" style="text-align: center; margin-bottom: 30px;">
+            <h2>🛸 Centro de Comando Orbital (Admin)</h2>
+            <p>Gerenciamento de chamados, fluxo do mês e aprovação de encomendas.</p>
+        </div>
+
+        <!-- CARDS DE MÉTRICAS -->
+        <div class="metrics-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px;">
+            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; border: 1px solid var(--glass-border); text-align: center;">
+                <small>Total de Pedidos</small>
+                <h3 id="metric-total" style="font-size: 2em; margin: 5px 0;">0</h3>
+            </div>
+            <div style="background: rgba(255, 193, 7, 0.1); padding: 15px; border-radius: 8px; border: 1px solid #ffc107; text-align: center;">
+                <small>⌛ Pendentes</small>
+                <h3 id="metric-pendentes" style="font-size: 2em; margin: 5px 0; color: #ffc107;">0</h3>
+            </div>
+            <div style="background: rgba(40, 167, 69, 0.1); padding: 15px; border-radius: 8px; border: 1px solid #28a745; text-align: center;">
+                <small>✅ Aprovados</small>
+                <h3 id="metric-aprovados" style="font-size: 2em; margin: 5px 0; color: #28a745;">0</h3>
+            </div>
+        </div>
+
+        <!-- PAINEL DUPLO: GRÁFICO E CALENDÁRIO -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin-bottom: 30px;">
+            <!-- GRÁFICO -->
+            <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; border: 1px solid var(--glass-border);">
+                <h3>📊 Distribuição dos Pedidos</h3>
+                <canvas id="graficoPedidos" style="max-height: 250px;"></canvas>
+            </div>
+
+            <!-- CALENDÁRIO MENSAL -->
+            <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; border: 1px solid var(--glass-border);">
+                <h3 id="titulo-calendario">🗓️ Calendário de Atendimento</h3>
+                <div id="grid-calendario" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-top: 15px; text-align: center;"></div>
+            </div>
+        </div>
+
+        <!-- TABELA DE GESTÃO DE PEDIDOS -->
+        <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; border: 1px solid var(--glass-border);">
+            <h3>📜 Pedidos Cadastrados</h3>
+            <div id="tabela-pedidos-admin" style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;"></div>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <button class="btn-back-home" onclick="mudarTela('orbita')">🪐 Retornar à Órbita Inicial</button>
+        </div>
+    </section>
+`,
     'login': `
         <section class="login-section">
             <div class="login-box">
@@ -84,7 +200,7 @@ const telasCelestine = {
                     <div class="atelie-text-block">
                         <h3>✂️ Nossa Forma de Trabalhar</h3>
                         <p>Nossos processos unem o respeito à alfaiataria clássica tradicional com a inovação conceitual do design futurista. Não produzimos em massa. Confeccionamos exclusivamente <strong>peças únicas, artísticas e autorais</strong>.</p>
-                        <p>Cada manto de luxo passa por uma triagem criativa minuciosa, onde analisamos a gravidade, a fluidez do movimento e o magnetismo do caimento no corpo. Vestir uma obra do Celestine é fazer um salto hiperespacial rumo à sua melhor versão.</p>
+                        <p>Cada manto de luxo passa por uma triagem criativa minuciosa, onde analisamos a gravidade, a fluidez do movemento e o magnetismo do caimento no corpo. Vestir uma obra do Celestine é fazer um salto hiperespacial rumo à sua melhor versão.</p>
                     </div>
                 </div>
                 <div class="atelie-manifesto-highlight">
@@ -174,7 +290,6 @@ const telasCelestine = {
             <div class="materiais-guia-container">
                 <div class="materiais-header">
                     <h3>🧪 Enciclopédia de Tecidos & Matéria-Prima</h3>
-
                     <p>Conheça a física e o caimento dos tecidos raros tecidos no ateliê.</p>
                 </div>
 
@@ -185,38 +300,7 @@ const telasCelestine = {
                 <button class="btn-back-home" onclick="mudarTela('orbita')">🪐 Retornar à Órbita Inicial</button>
             </div>
         </section>
-    `,
-  
-    'admin': `
-        <section class="agendamento-section" style="max-width: 600px; margin: 40px auto;">
-            <h3>🪐 Hangar de Criação: Cadastrar Manto</h3>
-            <p class="form-subtitle">Adicione novas peças autorais diretamente no banco de dados SQLite.</p>
-            
-            <form id="form-cadastro-manto" onsubmit="transmitirNovoManto(event)">
-                <label for="cad-titulo">Nome do Manto Estelar:</label>
-                <input type="text" id="cad-titulo" name="titulo" required placeholder="Ex: Smoking Anéis de Saturno">
-
-                <label for="cad-descricao">Descrição Conceitual:</label>
-                <input type="text" id="cad-descricao" name="descricao" required placeholder="Ex: Tecida com fios metálicos saturnianos...">
-
-                <label for="cad-preco">Investimento (Preço):</label>
-                <input type="text" id="cad-preco" name="preco" required placeholder="Ex: R$ 2.450,00">
-
-                <label for="cad-tempo">Tempo de Confecção:</label>
-                <input type="text" id="cad-tempo" name="tempo" required placeholder="Ex: 15 Dias Orbitais">
-
-                <label for="cad-foto">Fotografia do Traje (Arquivo):</label>
-                <input type="file" id="cad-foto" name="foto" accept="image/*" required style="padding: 10px; background: rgba(0,0,0,0.2);">
-
-                <button type="submit" class="btn-submit-quiz">🚀 Lançar Manto na Vitrine</button>
-            </form>
-            
-            <div style="text-align: center; margin-top: 30px;">
-                <button class="btn-back-home" onclick="mudarTela('orbita')">🪐 Retornar à Órbita Inicial</button>
-            </div>
-        </section>
     `
-
 };
 
 // ==========================================
@@ -240,6 +324,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (linkClientes) {
         linkClientes.setAttribute('onclick', "event.preventDefault(); abrirCaixaDeClientes();");
     }
+
+    const linkAdmin = document.querySelector('a[href="#admin"]');
+    if (linkAdmin) linkAdmin.setAttribute('onclick', "event.preventDefault(); mudarTela('admin');");
 });
 
 function configurarGatilhosNavegacao() {
@@ -285,6 +372,8 @@ function mudarTela(nomeDaTela) {
                 carregarMantosDoJson();
             } else if (nomeDaTela === 'exploracao') {
                 carregarGuiaMateriais();
+            } else if (nomeDaTela === 'admin') {
+                carregarPainelAdmin();
             }
             
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -311,6 +400,10 @@ async function carregarMantosDoJson() {
         p2.innerHTML = '';
 
         produtosGlobais.forEach((produto, index) => {
+            const descricaoTratada = produto.descricao.length > 100 
+                ? produto.descricao.substring(0, 100) + '...' 
+                : produto.descricao;
+
             const cardHTML = `
                 <article class="product-item" onclick="verDetalhesProduto(${index})" style="cursor: pointer;">
                     <div class="product-thumb">
@@ -318,7 +411,10 @@ async function carregarMantosDoJson() {
                     </div>
                     <div class="product-info-block">
                         <h4>${produto.titulo}</h4>
-                        <p>${produto.descricao}</p>
+                        <p class="product-description-text">${descricaoTratada}</p>
+                        <div class="product-meta-details" style="margin-bottom: 15px; font-size: 0.9rem; opacity: 0.8;">
+                            <span>💰 ${produto.preco}</span> | <span>⏳ ${produto.tempo}</span>
+                        </div>
                         <button type="button" class="btn-buy" onclick="event.stopPropagation(); verDetalhesProduto(${index})">
                             ✨ Ver Detalhes & Reservar
                         </button>
@@ -353,7 +449,7 @@ function verDetalhesProduto(index) {
 
             <div class="produto-detalhe-grid">
                 <div class="detalhe-imagem-container">
-                    <img src="${produto.imagem}" alt="${produto.alt}" class="detalhe-img-principal">
+                    <img src="${produto.imagem}" alt="${produto.alt}" class="detalhe-img-principal detalhe-img-fixa">
                     <div class="detalhe-badge-selo">🌌 Peça Autoral Exclusiva</div>
                 </div>
 
@@ -448,8 +544,8 @@ function iniciarAgendamentoComProduto(nomeProduto) {
 }
 
 function acionarAtendimentoPersonalizado(nomeProduto) {
-    const mensagem = encodeURIComponent(`Olá, equipe Celestine Ateliê! Gostaria de mais detalhes e atendimento sobre o manto: ${nomeProduto}`);
-    const urlWhatsapp = `https://api.whatsapp.com/send?phone=5541999999999&text=${mensagem}`;
+    const message = encodeURIComponent(`Olá, equipe Celestine Ateliê! Gostaria de mais detalhes e atendimento sobre o manto: ${nomeProduto}`);
+    const urlWhatsapp = `https://api.whatsapp.com/send?phone=5541999999999&text=${message}`;
     window.open(urlWhatsapp, '_blank');
 }
 
@@ -560,7 +656,6 @@ function refazerQuiz() {
 // 5. ENVIO DE FORMULÁRIOS & AUTENTICAÇÃO
 // ==========================================
 
-// Enviar pedido para o banco de dados SQLite
 async function processarAgendamentoEspacial(event) {
     event.preventDefault();
 
@@ -588,7 +683,6 @@ async function processarAgendamentoEspacial(event) {
     }
 }
 
-// Cadastrar / Autenticar cliente no SQLite
 async function autenticarTripulante(event) {
     event.preventDefault();
     const nome = document.getElementById('login-nome').value;
@@ -665,7 +759,6 @@ document.addEventListener('mousemove', (e) => {
 // 7. CONSULTAS AO BANCO DE DADOS (MODAIS)
 // ==========================================
 
-// --- CONSULTA DE PEDIDOS ---
 async function abrirCaixaDePedidos() {
     toggleMenu(); 
     const modal = document.getElementById('modalPedidos');
@@ -687,28 +780,33 @@ async function carregarPedidosDoBanco() {
         const resposta = await fetch(`${API_URL}/pedidos`);
         const pedidos = await resposta.json();
 
-        if (pedidos.length === 0) {
+        if (!pedidos || pedidos.length === 0) {
             container.innerHTML = '<p style="text-align:center; padding: 20px;">Nenhum pedido registrado no cosmos ainda.</p>';
             return;
         }
 
-        container.innerHTML = pedidos.map(p => `
-            <div class="card-pedido-item">
-                <div class="pedido-id">#${p.id}</div>
-                <div class="pedido-dados">
-                    <strong>${p.nome_cliente}</strong>
-                    <span>📡 ${p.email}</span>
-                    <small>✨ Estilo: ${p.estilo}</small>
+        container.innerHTML = pedidos.map(p => {
+            const statusAtual = p.status || 'Pendente';
+            const classeStatus = statusAtual.toLowerCase();
+
+            return `
+                <div class="card-pedido-item">
+                    <div class="pedido-id">#${p.id}</div>
+                    <div class="pedido-dados">
+                        <strong>${p.nome_cliente || p.nome}</strong>
+                        <span>📡 ${p.email}</span>
+                        <small>✨ Estilo: ${p.estilo}</small>
+                    </div>
+                    <span class="badge-status ${classeStatus}">${statusAtual}</span>
                 </div>
-                <span class="badge-status ${p.status ? p.status.toLowerCase() : 'pendente'}">${p.status || 'Pendente'}</span>
-            </div>
-        `).join('');
+            `;
+        }).join('');
     } catch (erro) {
-        container.innerHTML = '<p style="color: #ff6b6b; text-align: center;">Erro ao conectar com o banco SQLite. O servidor Node está rodando?</p>';
+        console.error('Erro ao carregar pedidos:', erro);
+        container.innerHTML = '<p style="color: #ff6b6b; text-align: center;">Erro ao conectar com o banco SQLite.</p>';
     }
 }
 
-// --- CONSULTA DE CLIENTES ---
 async function abrirCaixaDeClientes() {
     if (typeof toggleMenu === 'function') toggleMenu();
     const modal = document.getElementById('modalClientes');
@@ -748,30 +846,127 @@ async function carregarClientesDoBanco() {
         container.innerHTML = '<p style="color: #ff6b6b; text-align: center;">Erro ao consultar a lista de clientes.</p>';
     }
 }
-// Função para enviar o formulário com a foto para o Back-end
-async function transmitirNovoManto(event) {
-    event.preventDefault();
 
-    const form = document.getElementById('form-cadastro-manto');
-    // O FormData captura os textos e o arquivo de imagem perfeitamente para o Multer ler
-    const dadosFormulario = new FormData(form);
+async function carregarPainelAdmin() {
+    await carregarMetricasEGrafico();
+    await carregarTabelaAdmin();
+    gerarCalendarioOrbital();
+}
+
+async function carregarMetricasEGrafico() {
+    try {
+        const res = await fetch(`${API_URL}/admin/estatisticas`);
+        const dados = await res.json();
+
+        document.getElementById('metric-total').innerText = dados.total || 0;
+        document.getElementById('metric-pendentes').innerText = dados.pendentes || 0;
+        document.getElementById('metric-aprovados').innerText = dados.aprovados || 0;
+
+        const ctx = document.getElementById('graficoPedidos');
+        if (!ctx) return;
+
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Pendentes', 'Aprovados', 'Recusados'],
+                datasets: [{
+                    data: [dados.pendentes || 0, dados.aprovados || 0, dados.recusados || 0],
+                    backgroundColor: ['#ffc107', '#28a745', '#dc3545'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { labels: { color: '#ffffff' } }
+                }
+            }
+        });
+    } catch (err) {
+        console.error('Erro ao carregar estatísticas:', err);
+    }
+}
+
+async function carregarTabelaAdmin() {
+    const container = document.getElementById('tabela-pedidos-admin');
+    if (!container) return;
 
     try {
-        const resposta = await fetch(`${API_URL}/produtos`, {
-            method: 'POST',
-            body: dadosFormulario // Enviado diretamente sem JSON.stringify
+        const res = await fetch(`${API_URL}/pedidos`);
+        const pedidos = await res.json();
+
+        if (!pedidos || pedidos.length === 0) {
+            container.innerHTML = '<p style="text-align:center;">Nenhum pedido encontrado no banco de dados.</p>';
+            return;
+        }
+
+        container.innerHTML = pedidos.map(p => {
+            const statusAtual = p.status || 'Pendente';
+            const classeStatus = statusAtual.toLowerCase();
+
+            return `
+                <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px; margin-bottom: 8px; flex-wrap: wrap; gap: 10px;">
+                    <div>
+                        <strong>#${p.id} - ${p.nome_cliente || p.nome}</strong> (${p.email})<br>
+                        <small>✨ Estilo: ${p.estilo} | Status: <span class="badge-status ${classeStatus}">${statusAtual}</span></small>
+                    </div>
+                    <div style="display: flex; gap: 6px;">
+                        <button onclick="atualizarStatusPedido(${p.id}, 'Aprovado')" style="background: #28a745; color: white; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer;">✅ Aprovar</button>
+                        <button onclick="atualizarStatusPedido(${p.id}, 'Recusado')" style="background: #dc3545; color: white; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer;">❌ Recusar</button>
+                        <button onclick="atualizarStatusPedido(${p.id}, 'Pendente')" style="background: rgba(255,255,255,0.1); color: #ffc107; border: 1px solid #ffc107; padding: 6px 10px; border-radius: 4px; cursor: pointer;">⏳ Pendente</button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    } catch (err) {
+        console.error('Erro ao buscar pedidos:', err);
+        container.innerHTML = '<p style="color: #ff6b6b;">Erro ao carregar lista de pedidos.</p>';
+    }
+}
+
+async function atualizarStatusPedido(id, novoStatus) {
+    try {
+        const res = await fetch(`${API_URL}/pedidos/${id}/status`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ status: novoStatus })
         });
 
-        const resultado = await resposta.json();
-
-        if (resposta.ok) {
-            alert(`✨ Sucesso! O manto "${resultado.titulo}" foi eternizado no SQLite e salvo na pasta img!`);
-            form.reset();
-            mudarTela('colecoes'); // Redireciona para ver as coleções
+        if (res.ok) {
+            alert(`Pedido #${id} ${novoStatus} com sucesso!`);
+            carregarPainelAdmin();
         } else {
-            alert(`⚠️ Falha orbital: ${resultado.erro}`);
+            alert('Erro ao atualizar o status.');
         }
-    } catch (erro) {
-        alert('❌ Falha na conexão com o servidor de alta costura.');
+    } catch (err) {
+        alert('Falha na conexão com o servidor.');
     }
+}
+
+function gerarCalendarioOrbital() {
+    const container = document.getElementById('grid-calendario');
+    const titulo = document.getElementById('titulo-calendario');
+    if (!container) return;
+
+    const agora = new Date();
+    const ano = agora.getFullYear();
+    const mes = agora.getMonth();
+
+    const nomesMeses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+    titulo.innerText = `🗓️ ${nomesMeses[mes]} / ${ano}`;
+
+    const diasNoMes = new Date(ano, mes + 1, 0).getDate();
+    const hoje = agora.getDate();
+
+    let html = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'].map(d => `<strong style="font-size:0.8em; opacity:0.7;">${d}</strong>`).join('');
+
+    for (let dia = 1; dia <= diasNoMes; dia++) {
+        const isHoje = dia === hoje;
+        const bg = isHoje ? 'var(--saturn-gold, #ffd700)' : 'rgba(255,255,255,0.05)';
+        const corTexto = isHoje ? '#000' : '#fff';
+
+        html += `<div style="background: ${bg}; color: ${corTexto}; padding: 8px 0; border-radius: 4px; font-weight: bold; font-size: 0.9em;">${dia}</div>`;
+    }
+
+    container.innerHTML = html;
 }

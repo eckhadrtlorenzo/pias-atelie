@@ -52,9 +52,36 @@
     "alt": "Mangas Nebulosa de Primavera",
     "preco": "R$ 1.600,00",
     "tempo": "10 Dias Orbitais"
-  },
+  }, 
   {
     "id": 7,
+    "titulo": "Vestido Barbie Galáctica",
+    "descricao": "Manto de gala confeccionado em cetim rosa magnético, inspirado no brilho vibrante das constelações pop do universo.",
+    "imagem": "img/vestido_barbie.png",
+    "alt": "Vestido Barbie Galáctica",
+    "preco": "R$ 2.250,00",
+    "tempo": "14 Dias Orbitais"
+  },
+  {
+    "id": 8,
+    "titulo": "Manto Hibisco Cósmico",
+    "descricao": "Silhueta fluida em tons corais e avermelhados que simulam a flora exótica desabrochando sob a gravidade de uma nebulosa quente.",
+    "imagem": "img/vestido hibisco.jpeg",
+    "alt": "Manto Hibisco Cósmico",
+    "preco": "R$ 2.400,00",
+    "tempo": "16 Dias Orbitais"
+  },
+  {
+    "id": 9,
+    "titulo": "Manto Esmeralda de Órion",
+    "descricao": "Vestido estruturado in jacquard verde-esmeralda profundo, com veios brilhantes que imitam os rios de poeira estelar antiga.",
+    "imagem": "img/vestido verde esmeralda.jpeg",
+    "alt": "Manto Esmeralda de Órion",
+    "preco": "R$ 2.950,00",
+    "tempo": "18 Dias Orbitais"
+  },
+  {
+    "id": 10,
     "titulo": "Capa Nebulosa Escura",
     "descricao": "Terno unissex de alta-costura sci-fi desenhado com fechos ornamentais para a alta sociedade do universo.",
     "imagem": "img/terno beje.jpeg",
@@ -63,7 +90,7 @@
     "tempo": "22 Dias Orbitais"
   },
   {
-    "id": 8,
+    "id": 11,
     "titulo": "Túnica Gravidade Zero",
     "descricao": "Traje de gala espacial estruturado com correntes de titânio estelar e amarrações que desafiam a gravidade.",
     "imagem": "img/terno branco e vermelho.jpeg",
@@ -72,7 +99,7 @@
     "tempo": "20 Dias Orbitais"
   },
   {
-    "id": 9,
+    "id": 12,
     "titulo": "Diadema Estelar",
     "descricao": "Sobretudo longo em veludo carmesim profundo inspirado no brilho intenso de uma estrela anã vermelha.",
     "imagem": "img/terno vermelho.jpeg",
@@ -81,7 +108,7 @@
     "tempo": "15 Dias Orbitais"
   },
   {
-    "id": 10,
+    "id": 13,
     "titulo": "Vestido Radiação Cósmica",
     "descricao": "Traje diplomático cósmico rico em detalhes metálicos e punhos brocados que simulam relíquias de uma antiga galáxia.",
     "imagem": "img/terno azul escuro.jpeg",
@@ -90,7 +117,7 @@
     "tempo": "30 Dias Orbitais"
   },
   {
-    "id": 11,
+    "id": 14,
     "titulo": "Smoking Anéis de Saturno",
     "descricao": "Malha celestial tecida com a própria essência do firmamento noturno.",
     "imagem": "img/xale.jpeg",
@@ -99,66 +126,39 @@
     "tempo": "14 Dias Orbitais"
   },
   {
-    "id": 12,
-    "titulo": "Ombreiras Cinturão de Asteroides",
-    "descricao": "Colete de alta-costura em jacquard azul-noturno com arabescos que imitam órbitas de uma galáxia antiga.",
-    "imagem": "img/corset verde masc.jpeg",
-    "alt": "Ombreiras Cinturão de Asteroides",
-    "preco": "R$ 1.450,00",
-    "tempo": "10 Dias Orbitais"
-  },
-  {
-    "id": 13,
-    "titulo": "Túnica Nebulosa Dourada",
-    "descricao": "Tecida com fios metálicos saturnianos de alto brilho e caimento imponente.",
-    "imagem": "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600&auto=format&fit=crop",
-    "alt": "Túnica Nebulosa Dourada",
-    "preco": "R$ 3.400,00",
-    "tempo": "25 Dias Orbitais"
-  },
-  {
-    "id": 14,
+    "id": 15,
     "titulo": "Manto Via Láctea Cristais",
     "descricao": "Seda fluida com bordados manuais reluzentes inspirados em galáxias distantes.",
-    "imagem": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&auto=format&fit=crop",
-    "alt": "Manto Via Láctea Cristais",
-    "preco": "R$ 4.200,00",
-    "tempo": "30 Dias Orbitais"
-  },
-  {
-    "id": 15,
-    "titulo": "Vestido Radiação Cósmica",
-    "descricao": "Traje diplomático cósmico rico em detalhes metálicos e punhos brocados que simulam relíquias de uma antiga galáxia.",
-    "imagem": "img/terno azul escuro.jpeg",
-    "alt": "Vestido Radiação Cósmica",
-    "preco": "R$ 3.500,00",
+    "imagem": "img/terno kimono.jpeg",
+    "alt": "kimono terno perolado",
+    "preco": "R$ 2.200,00",
     "tempo": "30 Dias Orbitais"
   },
   {
     "id": 16,
-    "titulo": "Smoking Anéis de Saturno",
-    "descricao": "Malha celestial tecida com a própria essência do firmamento noturno.",
-    "imagem": "img/xale.jpeg",
-    "alt": "Smoking Anéis de Saturno",
-    "preco": "R$ 1.800,00",
-    "tempo": "14 Dias Orbitais"
+    "titulo": "Moletom Pulsação Quasar",
+    "descricao": "Moletom oversized acolchoado de alta costura com fibras térmicas adaptativas e capuz profundo de proteção estelar.",
+    "imagem": "img/moleton sakura.jpeg",
+    "alt": "Moletom Pulsação Quasar",
+    "preco": "R$ 1.200,00",
+    "tempo": "8 Dias Orbitais"
   },
   {
     "id": 17,
-    "titulo": "Ombreiras Cinturão de Asteroides",
-    "descricao": "Colete de alta-costura em jacquard azul-noturno com arabescos que imitam órbitas de uma galáxia antiga.",
-    "imagem": "img/corset verde masc.jpeg",
-    "alt": "Ombreiras Cinturão de Asteroides",
-    "preco": "R$ 1.450,00",
-    "tempo": "10 Dias Orbitais"
+    "titulo": "Conjunto Matriz Galáctica",
+    "descricao": "Conjunto de alfaiataria futurista com calça e casaco estruturados, modelados sem costuras aparentes sob gravidade controlada.",
+    "imagem": "img/conjunto masculino.jpeg",
+    "alt": "Conjunto Matriz Galáctica",
+    "preco": "R$ 3.400,00",
+    "tempo": "22 Dias Orbitais"
   },
   {
     "id": 18,
-    "titulo": "Túnica Nebulosa Dourada",
-    "descricao": "Tecida com fios metálicos saturnianos de alto brilho e caimento imponente.",
-    "imagem": "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600&auto=format&fit=crop",
-    "alt": "Túnica Nebulosa Dourada",
-    "preco": "R$ 3.400,00",
-    "tempo": "25 Dias Orbitais"
+    "titulo": "Camisa Social Magnetosfera",
+    "descricao": "Camisa social com gola imperial e fios refletores que alteram sua intensidade sob incidência direta de fótons.",
+    "imagem": "img/camisa social.jpeg",
+    "alt": "Camisa Social Magnetosfera",
+    "preco": "R$ 1.450,00",
+    "tempo": "10 Dias Orbitais"
   }
 ]

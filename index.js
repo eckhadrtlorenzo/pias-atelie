@@ -1,37 +1,16 @@
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const cors = require('cors');
-const path = require('path');
-const multer = require('multer'); // Importa o Multer para lidar com uploads
 
 const app = express();
 
-// ==========================================
-// MIDDLEWARES E CONFIGURAÇÕES DE PASTAS
-// ==========================================
+// Middlewares
 app.use(cors());
 app.use(express.json());
-
-// Garante que o Express consiga servir seu HTML, CSS e JS locais sem travar
-app.use(express.static(path.join(__dirname))); 
-
-// Define especificamente que a pasta 'img' é pública para renderizar as fotos no site
-app.use('/img', express.static(path.join(__dirname, 'img')));
-
-// Configura o Multer para salvar as imagens diretamente na sua pasta 'img'
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, 'img')); // Caminho absoluto para a pasta img
-    },
-    filename: (req, file, cb) => {
-        // Define o nome do arquivo usando o timestamp atual para evitar nomes duplicados
-        cb(null, Date.now() + path.extname(file.originalname));
-    }
-});
-const upload = multer({ storage });
+app.use(express.static('.')); // Servir os arquivos HTML/CSS/JS do front-end
 
 // Conexão com o banco de dados SQLite
-const db = new sqlite3.Database(path.join(__dirname, 'database.db'), (err) => {
+const db = new sqlite3.Database('./database.db', (err) => {
     if (err) {
         console.error('Erro ao conectar ao banco de dados:', err.message);
     } else {
@@ -57,23 +36,13 @@ db.serialize(() => {
         status TEXT DEFAULT 'Pendente',
         data DATETIME DEFAULT CURRENT_TIMESTAMP
     )`);
-
-    // Nova tabela para salvar os novos mantos/produtos cadastrados
-    db.run(`CREATE TABLE IF NOT EXISTS produtos (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        titulo TEXT NOT NULL,
-        descricao TEXT,
-        imagem TEXT NOT NULL, -- Guarda o caminho da imagem como texto (Ex: img/12345.jpg)
-        preco TEXT,
-        tempo TEXT
-    )`);
 });
 
 // ==========================================
 // ROTAS DE CLIENTES
 // ==========================================
 
-// POST: Cadastrar um novo cliente diretamente
+// POST: Cadastrar um novo cliente
 app.post('/api/clientes', (req, res) => {
     const { nome, email } = req.body;
 
@@ -111,10 +80,10 @@ app.get('/api/clientes', (req, res) => {
 });
 
 // ==========================================
-// ROTAS DE PEDIDOS
+// ROTAS DE PEDIDOS E ADMIN
 // ==========================================
 
-// POST: Criar novo pedido (e auto-cadastrar cliente se não existir)
+// POST: Criar novo pedido
 app.post('/api/pedidos', (req, res) => {
     const { nome, email, estilo } = req.body;
 
@@ -122,10 +91,6 @@ app.post('/api/pedidos', (req, res) => {
         return res.status(400).json({ erro: 'Por favor, preencha todos os campos do pedido.' });
     }
 
-    // 1. Cadastra o cliente automaticamente se ainda não existir
-    db.run('INSERT OR IGNORE INTO clientes (nome, email) VALUES (?, ?)', [nome, email]);
-
-    // 2. Grava o pedido na tabela pedidos
     const sqlPedido = 'INSERT INTO pedidos (nome_cliente, email, estilo) VALUES (?, ?, ?)';
     db.run(sqlPedido, [nome, email, estilo], function (err) {
         if (err) {
@@ -153,48 +118,41 @@ app.get('/api/pedidos', (req, res) => {
     });
 });
 
-// ==========================================
-// NOVA ROTA: CADASTRO DE MANTOS (PRODUTOS)
-// ==========================================
-app.post('/api/produtos', upload.single('foto'), (req, res) => {
-    const { titulo, descricao, preco, tempo } = req.body;
+// PUT: Alterar o status do pedido (Aprovado / Recusado / Pendente)
+app.put('/api/pedidos/:id/status', (req, res) => {
+    const { id } = req.params;
+    const { status } = req.body;
 
-    if (!req.file) {
-        return res.status(400).json({ erro: 'Por favor, envie uma imagem para o manto.' });
-    }
-
-    // Cria o caminho de texto adaptado para o seu formato (Ex: img/nome-do-arquivo.jpg)
-    const caminhoImagem = `img/${req.file.filename}`;
-
-    const sql = 'INSERT INTO produtos (titulo, descricao, imagem, preco, tempo) VALUES (?, ?, ?, ?, ?)';
-    db.run(sql, [titulo, descricao, caminhoImagem, preco, tempo], function (err) {
+    const query = `UPDATE pedidos SET status = ? WHERE id = ?`;
+    db.run(query, [status, id], function (err) {
         if (err) {
-            return res.status(500).json({ erro: 'Erro ao salvar manto no banco.', detalhes: err.message });
+            return res.status(500).json({ erro: err.message });
         }
-
-        res.status(201).json({
-            mensagem: 'Manto Estelar adicionado com sucesso!',
-            id: this.lastID,
-            titulo,
-            imagem: caminhoImagem
-        });
+        res.json({ mensagem: `Pedido #${id} alterado para ${status}!` });
     });
 });
 
-// NOVA ROTA: CONSULTAR TODOS OS MANTOS DO BANCO
-app.get('/api/produtos', (req, res) => {
-    const sql = 'SELECT * FROM produtos ORDER BY id DESC';
-    db.all(sql, [], (err, rows) => {
+// GET: Estatísticas para o painel admin e gráfico
+app.get('/api/admin/estatisticas', (req, res) => {
+    const query = `
+        SELECT 
+            COUNT(*) as total,
+            SUM(CASE WHEN status = 'Pendente' OR status IS NULL THEN 1 ELSE 0 END) as pendentes,
+            SUM(CASE WHEN status = 'Aprovado' THEN 1 ELSE 0 END) as aprovados,
+            SUM(CASE WHEN status = 'Recusado' THEN 1 ELSE 0 END) as recusados
+        FROM pedidos
+    `;
+
+    db.get(query, [], (err, row) => {
         if (err) {
-            return res.status(500).json({ erro: 'Erro ao buscar mantos.', detalhes: err.message });
+            return res.status(500).json({ erro: err.message });
         }
-        res.json(rows);
+        res.json(row || { total: 0, pendentes: 0, aprovados: 0, recusados: 0 });
     });
 });
 
-// Inicialização do servidor
+// Inicialização do servidor no final do arquivo
 const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
 });
-

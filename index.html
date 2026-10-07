@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
     <script src="produtos.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
@@ -23,6 +24,7 @@
             <li><a href="#mais-vendidos">👑 Mais Vendidos (Clientes)</a></li>
             <li><a href="#provador">🪐 Provador de Saturno 3D</a></li>
             <li><a href="#clientes" onclick="event.preventDefault(); abrirCaixaDeClientes();">👤 Clientes Registrados</a></li>
+            <li><a href="#admin" class="nav-admin-link" onclick="event.preventDefault(); mudarTela('admin'); carregarPainelAdmin();">🛸 Centro de Comando (Admin)</a></li>
         </ul>
     </div>
 </aside>
